@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Undead Survivor/Demo/Demo.unity
-    guid: 38e5db794b8649e42b8feb732f733f6c
+    path: Assets/Scenes/Bootstrap.unity
+    guid: a615fcc5dab39964c87b0785d278893c
+  - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
+    guid: 02a3a6bba4ee5cc4f9057e0386d0b3c0
   m_configObjects: {}
