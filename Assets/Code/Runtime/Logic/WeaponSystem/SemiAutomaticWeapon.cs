@@ -6,10 +6,10 @@ namespace Code.Runtime.Logic.WeaponSystem
     {
         protected override void ShootImplementation(Vector2 direction)
         {
-            IBullet bullet = Runner.Spawn(bulletPrefab, spawnBulletPoint.position, Quaternion.identity);
+            IBullet bullet = Runner.Spawn(BulletPrefab, spawnBulletPoint.position, Quaternion.identity);
             
-            bullet.Initialize(damage);
-            bullet.Move(direction, shootForce);
+            bullet.Initialize(Damage);
+            bullet.Move(direction, ShootForce);
         }
     }
 }
