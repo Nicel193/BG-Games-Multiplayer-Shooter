@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Logic.WeaponSystem
 {
-    public class Pistol : BaseWeapon
+    public class SemiAutomaticWeapon : BaseWeapon
     {
         protected override void ShootImplementation(Vector2 direction)
         {

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82d65722c8f4cffb2987ac7fb040ed0, type: 3}
+  m_Name: PistolConfig
+  m_EditorClassIdentifier: 
+  <WeaponPrefab>k__BackingField: {fileID: 685287594071621040, guid: d0d8560b86ab0e04ab9d5c6477f6ea57, type: 3}
+  <WeaponType>k__BackingField: 0
+  <BulletPrefab>k__BackingField: {fileID: 2539617988107825905, guid: f6949169aa151384f8990cdafcfa2e5b, type: 3}
+  <Damage>k__BackingField: 5
+  <ShootForce>k__BackingField: 10
+  <ShootInterval>k__BackingField: 0.2

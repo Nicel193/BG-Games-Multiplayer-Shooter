@@ -5,18 +5,19 @@ namespace Code.Runtime.Logic.WeaponSystem
 {
     public abstract class BaseWeapon : NetworkBehaviour
     {
-        [SerializeField] protected Bullet bulletPrefab;
         [SerializeField] protected Transform spawnBulletPoint;
-        [SerializeField] protected int damage;
-        [SerializeField] protected int shootForce;
-        [SerializeField] protected float shootInterval = 0.5f;
         
-        private float _shootTimer = 0f;
+        protected Bullet bulletPrefab;
+        protected int damage;
+        protected int shootForce;
+        protected float shootInterval;
+        
+        private float _shootTimer;
         
         public override void FixedUpdateNetwork()
         {
             if (_shootTimer < shootInterval)
-                _shootTimer += Time.deltaTime;
+                _shootTimer += Runner.DeltaTime;
         }
 
         public void Shoot(Vector2 direction)
