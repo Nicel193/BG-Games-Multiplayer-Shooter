@@ -4,7 +4,7 @@ namespace Code.Runtime.Logic.WeaponSystem
 {
     public class Pistol : BaseWeapon
     {
-        public override void Shoot(Vector2 direction)
+        protected override void ShootImplementation(Vector2 direction)
         {
             IBullet bullet = Runner.Spawn(bulletPrefab, spawnBulletPoint.position, Quaternion.identity);
             

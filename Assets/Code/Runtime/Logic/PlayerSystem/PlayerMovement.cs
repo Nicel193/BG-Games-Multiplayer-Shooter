@@ -20,13 +20,14 @@ namespace Code.Runtime.Logic.PlayerSystem
         {
             if (GetInput(out NetworkInputData data))
             {
-                Debug.Log(data.MoveDirection);
-                
                 data.MoveDirection.Normalize();
+                data.ShootDirection.Normalize();
 
+                float playerRotation = data.ShootDirection.x >= 0 ? 0 : 180;
                 Vector3 direction = Runner.DeltaTime * 5f * data.MoveDirection;
-
-                transform.Translate(direction);
+                
+                transform.eulerAngles = new Vector3(0f, playerRotation, 0f);
+                transform.position += direction;
             }
         }
     }

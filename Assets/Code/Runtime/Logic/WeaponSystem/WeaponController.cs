@@ -6,19 +6,23 @@ namespace Code.Runtime.Logic.WeaponSystem
     public class WeaponController : NetworkBehaviour
     {
         [SerializeField] private BaseWeapon baseWeapon;
-        
+
         public override void FixedUpdateNetwork()
         {
-            if (GetInput(out NetworkInputData networkData))
+            if (GetInput(out NetworkInputData inputData))
             {
-                networkData.ShootDirection.Normalize();
+                inputData.ShootDirection.Normalize();
 
-                Vector3 direction = Runner.DeltaTime * networkData.ShootDirection;
+                Vector3 direction = Runner.DeltaTime * inputData.ShootDirection;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                
-                transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-                if (networkData.IsShoot) baseWeapon.Shoot(direction);
+                Vector3 correctRotation = inputData.ShootDirection.x >= 0
+                    ? new Vector3(0f, 0f, angle)
+                    : new Vector3(180f, -180f, -angle);
+
+                transform.localRotation = Quaternion.Euler(correctRotation);
+                
+                if (inputData.IsShoot) baseWeapon.Shoot(direction);
             }
         }
     }

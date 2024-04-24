@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Code.Runtime.Logic
 {
@@ -26,6 +27,8 @@ namespace Code.Runtime.Logic
             Vector3 direction = mousePosition - screenCenter;
 
             data.ShootDirection = direction;
+            
+            data.IsShoot = Input.GetMouseButton(0);
 
             input.Set(data);
         }

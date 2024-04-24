@@ -9,7 +9,26 @@ namespace Code.Runtime.Logic.WeaponSystem
         [SerializeField] protected Transform spawnBulletPoint;
         [SerializeField] protected int damage;
         [SerializeField] protected int shootForce;
+        [SerializeField] protected float shootInterval = 0.5f;
+        
+        private float _shootTimer = 0f;
+        
+        public override void FixedUpdateNetwork()
+        {
+            if (_shootTimer < shootInterval)
+                _shootTimer += Time.deltaTime;
+        }
 
-        public abstract void Shoot(Vector2 direction);
+        public void Shoot(Vector2 direction)
+        {
+            if (_shootTimer >= shootInterval)
+            {
+                ShootImplementation(direction);
+                
+                _shootTimer = 0f;
+            }
+        }
+        
+        protected abstract void ShootImplementation(Vector2 direction);
     }
 }
