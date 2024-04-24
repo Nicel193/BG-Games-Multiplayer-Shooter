@@ -7,22 +7,25 @@ namespace Code.Runtime.Logic.PlayerSystem
 {
     public class PlayerFactory : IPlayerFactory
     {
+        private NetworkRunner _networkRunner;
         private DiContainer _diContainer;
         private PlayerConfig _playerConfig;
 
-        PlayerFactory(DiContainer diContainer, PlayerConfig playerConfig)
+        PlayerFactory(DiContainer diContainer, NetworkRunner networkRunner, PlayerConfig playerConfig)
         {
             _diContainer = diContainer;
+            _networkRunner = networkRunner;
             _playerConfig = playerConfig;
         }
 
-        public NetworkObject SpawnPlayer(NetworkRunner networkRunner)
+        public NetworkObject SpawnPlayer(PlayerRef playerRef)
         {
-            NetworkObject player = networkRunner.Spawn(_playerConfig.PlayerPrefab, Vector3.zero, Quaternion.identity);
+            NetworkObject playerObject = _networkRunner.Spawn(_playerConfig.PlayerPrefab, Vector3.zero,
+                Quaternion.identity, playerRef);
             
-            _diContainer.Inject(player);
+            _diContainer.Inject(playerObject);
 
-            return player;
+            return playerObject;
         }
     }
 }
