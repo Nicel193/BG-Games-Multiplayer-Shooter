@@ -3,7 +3,7 @@ using Fusion;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Runtime.Logic.Player
+namespace Code.Runtime.Logic.PlayerSystem
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : NetworkBehaviour
@@ -20,11 +20,13 @@ namespace Code.Runtime.Logic.Player
         {
             if (GetInput(out NetworkInputData data))
             {
-                data.direction.Normalize();
+                Debug.Log(data.MoveDirection);
+                
+                data.MoveDirection.Normalize();
 
-                Vector3 direction = Runner.DeltaTime * _moveSpeed * data.direction;
+                Vector3 direction = Runner.DeltaTime * 5f * data.MoveDirection;
 
-                this.transform.Translate(direction);
+                transform.Translate(direction);
             }
         }
     }

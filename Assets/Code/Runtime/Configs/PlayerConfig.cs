@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 namespace Code.Runtime.Configs
@@ -6,5 +7,6 @@ namespace Code.Runtime.Configs
     public class PlayerConfig : ScriptableObject
     {
         [field: SerializeField] public float MoveSpeed { get; private set; }
+        [field: SerializeField] public NetworkPrefabRef PlayerPrefab { get; private set; }
     }
 }

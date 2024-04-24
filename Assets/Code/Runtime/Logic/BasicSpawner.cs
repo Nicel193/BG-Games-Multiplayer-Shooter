@@ -8,38 +8,24 @@ namespace Code.Runtime.Logic
 {
     public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
-        [SerializeField] private NetworkPrefabRef _playerPrefab;
-        [SerializeField] private EmemySpawner _ememySpawner;
-    
-        private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) { }
 
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-        {
-            if (runner.IsServer)
-            {
-                Vector3 spawnPosition = Vector3.zero;
-                NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-            
-                _spawnedCharacters.Add(player, networkPlayerObject);
-                _ememySpawner.Initialize(networkPlayerObject.transform);
-            }
-        }
-
-        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
-        {
-            if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
-            {
-                runner.Despawn(networkObject);
-                _spawnedCharacters.Remove(player);
-            }
-        }
+        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) { }
 
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
-            var data = new NetworkInputData();
+            NetworkInputData data = new NetworkInputData();
 
-            data.direction.x = Input.GetAxis("Horizontal");
-            data.direction.y = Input.GetAxis("Vertical");
+            data.MoveDirection.x = Input.GetAxis("Horizontal");
+            data.MoveDirection.y = Input.GetAxis("Vertical");
+            
+            Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0); // Находим центр экрана
+            Vector3 mousePosition = Input.mousePosition; // Получаем позицию мыши на экране
+
+            // Вычисляем направление от центра экрана к позиции мыши
+            Vector3 direction = mousePosition - screenCenter;
+
+            data.ShootDirection = direction;
 
             input.Set(data);
         }
