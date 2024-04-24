@@ -1,18 +1,34 @@
+using Code.Runtime.Configs;
 using UnityEngine;
+using Zenject;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private float smoothSpeed = 0.125f;
+    private Transform _target;
+    private Vector3 _cameraOffset;
+    private float _cameraSmoothSpeed;
+
+    [Inject]
+    public void Construct(PlayerConfig playerConfig)
+    {
+        _cameraOffset = playerConfig.CameraOffset;
+        _cameraSmoothSpeed = playerConfig.CameraSmoothSpeed;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        if (_target != null) return;
+
+        _target = target;
+    }
 
     void LateUpdate()
     {
-        if (target == null)
+        if (_target == null)
             return;
 
-        Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        Vector3 desiredPosition = _target.position + _cameraOffset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _cameraSmoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
     }
 }
