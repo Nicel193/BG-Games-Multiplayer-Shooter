@@ -1,27 +1,28 @@
+using Fusion;
 using UnityEngine;
 
-public class SimpleAI : MonoBehaviour
+public class SimpleAI : NetworkBehaviour
 {
-    public Transform player; // Ссылка на игрока
-    public float moveSpeed = 3f; // Скорость движения ИИ
-    public float stoppingDistance = 2f; // Расстояние, на котором ИИ должен остановиться
+    public float moveSpeed = 3f;
+    public float stoppingDistance = 2f;
 
-    void Update()
+    private Transform _player;
+
+    public void Initialize(Transform player) =>
+        _player = player;
+
+    public override void FixedUpdateNetwork()
     {
-        if (player != null)
+        if (_player != null)
         {
-            // Вычисляем направление к игроку
-            Vector3 direction = (player.position - transform.position).normalized;
-
-            // Проверяем расстояние до игрока
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            Vector3 direction = (_player.position - transform.position).normalized;
+            
+            float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
 
             if (distanceToPlayer > stoppingDistance)
             {
-                // Вычисляем вектор перемещения
                 Vector3 movement = direction * moveSpeed * Time.deltaTime;
 
-                // Перемещаем ИИ
                 transform.Translate(movement);
             }
         }

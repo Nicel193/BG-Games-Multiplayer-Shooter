@@ -1,22 +1,27 @@
+using Fusion;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerMovement : NetworkBehaviour
 {
-    public float moveSpeed = 5f; // Скорость движения игрока
+    public float moveSpeed = 5f;
 
-    void Update()
+    private Rigidbody2D _rigidbody2D;
+
+    private void Awake()
     {
-        // Получаем ввод от клавиатуры
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
-        // Определяем направление движения
-        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+    public override void FixedUpdateNetwork()
+    {
+        if (GetInput(out NetworkInputData data))
+        {
+            data.direction.Normalize();
 
-        // Вычисляем вектор перемещения
-        Vector3 movement = moveDirection * moveSpeed * Time.deltaTime;
+            Vector3 direction = Runner.DeltaTime * moveSpeed * data.direction;
 
-        // Перемещаем игрока
-        transform.Translate(movement);
+            this.transform.Translate(direction);
+        }
     }
 }
