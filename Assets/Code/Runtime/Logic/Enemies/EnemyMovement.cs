@@ -27,7 +27,7 @@ namespace Code.Runtime.Logic.Enemies
 
                 if (distanceToPlayer > _stoppingDistance)
                 {
-                    Vector3 movement = direction * _moveSpeed * Time.deltaTime;
+                    Vector3 movement = direction * _moveSpeed * Runner.DeltaTime;
 
                     transform.Translate(movement);
                 }

@@ -9,10 +9,14 @@ namespace Code.Runtime.Logic.WeaponSystem
     public class Bullet : NetworkBehaviour, IBullet
     {
         private Rigidbody2D _bulletRigidbody2D;
+        private NetworkObject _networkObject;
         private int _damage;
 
-        private void Awake() =>
+        private void Awake()
+        {
             _bulletRigidbody2D = GetComponent<Rigidbody2D>();
+            _networkObject = GetComponent<NetworkObject>();
+        }
 
         public void Initialize(int damage) =>
             _damage = damage;
@@ -30,7 +34,7 @@ namespace Code.Runtime.Logic.WeaponSystem
             {
                 damageable.Damage(_damage);
 
-                Destroy(gameObject);
+                Runner.Despawn(_networkObject);
             }
         }
     }

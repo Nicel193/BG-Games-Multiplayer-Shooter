@@ -44,9 +44,10 @@ namespace Code.Runtime.Logic.Enemies
 
             if (_health <= 0)
             {
-                NetworkObject networkObject = GetComponent<NetworkObject>();
-
-                Runner.Despawn(networkObject);
+                if (TryGetComponent(out NetworkObject networkObject))
+                {
+                    Runner.Despawn(networkObject);
+                }
             }
         }
     }

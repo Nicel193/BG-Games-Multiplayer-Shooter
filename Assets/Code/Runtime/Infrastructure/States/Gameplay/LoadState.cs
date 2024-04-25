@@ -40,7 +40,7 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
 
         private void InitializeWaveSystem(PlayerRef playerRef)
         {
-            if (playerRef.IsMasterClient)
+            if (playerRef.PlayerId == 1)
                 _waveHandler.Initialize();
         }
 
