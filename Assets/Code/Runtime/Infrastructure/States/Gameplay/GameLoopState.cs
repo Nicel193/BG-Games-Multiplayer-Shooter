@@ -1,30 +1,16 @@
+using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Repositories;
+using UnityEngine;
 
 namespace Code.Runtime.Infrastructure.States.Gameplay
 {
-    public class GameLoopState : IState, IUpdatebleState
+    public class GameLoopState : IState
     {
-        private const int TimeToAddScore = 1;
-        private const int ScoreInOneInterval = 1;
-        
-        private float _scoreTimer;
-        private bool _isFirstEntry = true;
-
-        public GameLoopState(IInteractorContainer interactorContainer)
-        {
-
-        }
-
         public void Enter()
         {
-
+            Debug.Log("Game loop state");
         }
-
-        public void Update()
-        {
-
-        }
-
+        
         public void Exit()
         {
             

@@ -1,3 +1,4 @@
+using System;
 using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
 using UnityEngine;
@@ -25,10 +26,12 @@ namespace Code.Runtime.Logic.WeaponSystem
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.TryGetComponent(out Player player))
+            Debug.Log(other.transform.name);
+            
+            if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                player.RPC_Damage(_damage);
-                
+                damageable.Damage(_damage);
+
                 Destroy(gameObject);
             }
         }

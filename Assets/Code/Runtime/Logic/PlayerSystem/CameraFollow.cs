@@ -2,7 +2,12 @@ using Code.Runtime.Configs;
 using UnityEngine;
 using Zenject;
 
-public class CameraFollow : MonoBehaviour
+public interface ICameraFollow
+{
+    void SetTarget(Transform target);
+}
+
+public class CameraFollow : MonoBehaviour, ICameraFollow
 {
     private Transform _target;
     private Vector3 _cameraOffset;

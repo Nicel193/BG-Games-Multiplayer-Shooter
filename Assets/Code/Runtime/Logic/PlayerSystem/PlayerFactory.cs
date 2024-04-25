@@ -1,11 +1,9 @@
-using System;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
