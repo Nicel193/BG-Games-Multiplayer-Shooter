@@ -5,5 +5,6 @@ namespace Code.Runtime.Logic.WeaponSystem
         Pistol,
         Shotgun,
         AssaultRifle,
+        Melee
     }
 }

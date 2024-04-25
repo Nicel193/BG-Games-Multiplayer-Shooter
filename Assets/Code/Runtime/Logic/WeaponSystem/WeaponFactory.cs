@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Runtime.Configs;
+using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
 using Zenject;

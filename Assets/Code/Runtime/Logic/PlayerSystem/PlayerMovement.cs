@@ -1,3 +1,4 @@
+using System;
 using Code.Runtime.Configs;
 using Fusion;
 using UnityEngine;
@@ -5,10 +6,15 @@ using Zenject;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimator))]
     public class PlayerMovement : NetworkBehaviour
     {
+        private PlayerAnimator _playerAnimator;
+        
         private float _moveSpeed;
+        
+        private void Awake() =>
+            _playerAnimator = GetComponent<PlayerAnimator>();
 
         [Inject]
         private void Construct(PlayerConfig playerConfig)
@@ -28,7 +34,17 @@ namespace Code.Runtime.Logic.PlayerSystem
                 
                 transform.eulerAngles = new Vector3(0f, playerRotation, 0f);
                 transform.position += direction;
+                
+                PlayAnimation(data.MoveDirection);
             }
+        }
+
+        private void PlayAnimation(Vector3 moveDirection)
+        {
+            if (moveDirection == Vector3.zero)
+                _playerAnimator.PlayIdle();
+            else
+                _playerAnimator.PlayRun();
         }
     }
 }

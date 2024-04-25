@@ -1,4 +1,5 @@
 using Code.Runtime.Configs;
+using Code.Runtime.Logic.WeaponSystem.Types;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.WeaponSystem
@@ -25,7 +26,7 @@ namespace Code.Runtime.Logic.WeaponSystem
             base.Initialize(shotgunConfig);
         }
         
-        protected override void ShootImplementation(Vector2 direction)
+        protected override void AttackImplementation(Vector2 direction)
         {
             for (int i = 0; i < _pelletsCount; i++)
             {

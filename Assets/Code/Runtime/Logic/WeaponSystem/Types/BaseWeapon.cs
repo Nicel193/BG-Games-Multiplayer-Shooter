@@ -2,7 +2,7 @@ using Code.Runtime.Configs;
 using Fusion;
 using UnityEngine;
 
-namespace Code.Runtime.Logic.WeaponSystem
+namespace Code.Runtime.Logic.WeaponSystem.Types
 {
     public abstract class BaseWeapon : NetworkBehaviour
     {
@@ -30,16 +30,16 @@ namespace Code.Runtime.Logic.WeaponSystem
                 _shootTimer += Runner.DeltaTime;
         }
 
-        public void Shoot(Vector2 direction)
+        public void Attack(Vector2 direction)
         {
             if (_shootTimer >= _shootInterval)
             {
-                ShootImplementation(direction);
+                AttackImplementation(direction);
                 
                 _shootTimer = 0f;
             }
         }
         
-        protected abstract void ShootImplementation(Vector2 direction);
+        protected abstract void AttackImplementation(Vector2 direction);
     }
 }

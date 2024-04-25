@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.WeaponSystem;
+using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -37,6 +38,6 @@ namespace Code.Runtime.Logic.PlayerSystem
         }
 
         private WeaponType GetRandomWeaponType() =>
-            (WeaponType)Random.Range(0, Enum.GetNames(typeof(WeaponType)).Length);
+            (WeaponType)Random.Range(0, _playerConfig.GetWeaponsConfigs().Count);
     }
 }

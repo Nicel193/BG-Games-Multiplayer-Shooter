@@ -1,3 +1,4 @@
+using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace Code.Runtime.Logic.WeaponSystem
 
                 transform.localRotation = Quaternion.Euler(correctRotation);
                 
-                if (inputData.IsShoot) baseWeapon.Shoot(direction);
+                if (inputData.IsShoot) baseWeapon.Attack(direction);
             }
         }
     }

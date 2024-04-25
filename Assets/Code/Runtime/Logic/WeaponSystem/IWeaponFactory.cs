@@ -1,3 +1,4 @@
+using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 
 namespace Code.Runtime.Logic.WeaponSystem

@@ -1,4 +1,5 @@
 using Code.Runtime.Logic.WeaponSystem;
+using Code.Runtime.Logic.WeaponSystem.Types;
 using UnityEngine;
 
 namespace Code.Runtime.Configs
