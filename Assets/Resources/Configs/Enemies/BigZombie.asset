@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86b516da85c48219d6490b1e27210d9, type: 3}
+  m_Name: BigZombie
+  m_EditorClassIdentifier: 
+  <EnemyPrefab>k__BackingField: {fileID: 6262901623101361191, guid: de0c91919ebd39a40bf55a7a6c27c384, type: 3}
+  <MoveSpeed>k__BackingField: 1
+  <StoppingDistance>k__BackingField: 1
+  <MaxHealth>k__BackingField: 20
+  <Damage>k__BackingField: 5
+  <AttackInterval>k__BackingField: 2

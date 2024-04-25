@@ -19,11 +19,7 @@ namespace Code.Runtime.Logic.Enemies
         public void PlayAttack() =>
             _animator.SetTrigger(AttackHash);
 
-        public void PlayDeath()
-        {
+        public void PlayDeath() =>
             _animator.SetBool(DeathHash, true);
-            
-            weaponAnimation.gameObject.SetActive(false);
-        }
     }
 }

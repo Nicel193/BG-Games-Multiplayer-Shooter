@@ -6,7 +6,7 @@ namespace Code.Runtime.Logic.Enemies
 {
     public interface IEnemyFactory
     {
-        BaseEnemy SpawnEnemy(BaseEnemy enemyPrefab, Vector3 at);
+        Enemy SpawnEnemy(Enemy enemyPrefab, Vector3 at);
     }
 
     public class EnemyFactory : IEnemyFactory
@@ -20,9 +20,9 @@ namespace Code.Runtime.Logic.Enemies
             _networkRunner = networkRunner;
         }
         
-        public BaseEnemy SpawnEnemy(BaseEnemy enemyPrefab, Vector3 at)
+        public Enemy SpawnEnemy(Enemy enemyPrefab, Vector3 at)
         {
-            BaseEnemy playerObject = _networkRunner.Spawn(enemyPrefab, at, Quaternion.identity);
+            Enemy playerObject = _networkRunner.Spawn(enemyPrefab, at, Quaternion.identity);
             
             _diContainer.Inject(playerObject);
 

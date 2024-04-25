@@ -21,7 +21,7 @@ namespace Code.Runtime.Logic.WeaponSystem
         public void Initialize(int damage) =>
             _damage = damage;
 
-        public void Move(Vector2 direction, int force)
+        public void Move(Vector2 direction, float force)
         {
             direction.Normalize();
 

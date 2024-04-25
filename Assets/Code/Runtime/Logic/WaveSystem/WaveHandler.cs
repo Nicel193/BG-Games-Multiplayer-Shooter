@@ -10,7 +10,7 @@ namespace Code.Runtime.Logic.WaveSystem
 {
     public class WaveHandler : NetworkBehaviour, IWaveHandler
     {
-        [SerializeField] private BaseEnemyConfig enemyConfig;
+        [SerializeField] private BaseEnemyConfig[] enemyConfigs;
         [SerializeField] private float waveSeconds;
         [SerializeField] private WaveTimeTextView _waveTimeTextView;
 
@@ -62,8 +62,9 @@ namespace Code.Runtime.Logic.WaveSystem
         private void SpawnEnemy()
         {
             Vector3 randomPosition = new Vector3(Random.Range(0f, 10f), Random.Range(0, 10f));
+            BaseEnemyConfig enemyConfig = enemyConfigs[Random.Range(0, enemyConfigs.Length)];
 
-            BaseEnemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.BaseEnemyPrefab, randomPosition);
+            Enemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.EnemyPrefab, randomPosition);
             Transform targetPlayer = FindTargetPlayer();
 
             enemy.Initialize(enemyConfig, targetPlayer);
