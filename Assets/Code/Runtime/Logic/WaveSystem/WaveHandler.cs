@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.Enemies;
 using Code.Runtime.UI;
@@ -10,17 +9,15 @@ namespace Code.Runtime.Logic.WaveSystem
 {
     public class WaveHandler : NetworkBehaviour, IWaveHandler
     {
-        [SerializeField] private BaseEnemyConfig[] enemyConfigs;
-        [SerializeField] private float waveSeconds;
-        [SerializeField] private WaveTimeTextView _waveTimeTextView;
+        [Networked] public TickTimer WaveTimer { get; set; }
 
-        [Networked] TickTimer WaveTimer { get; set; }
+        [SerializeField] private WaveConfig[] waveConfigs;
+        [SerializeField] private WaveTimeTextView waveTimeTextView;
 
         private IEnemyFactory _enemyFactory;
         private INetworkPlayersHandler _networkPlayersHandler;
-        private bool _isSpawn;
-        private float _timeToSpawn;
-        private float _spawnTime;
+        private WaveStateMachine _waveStateMachine;
+        private int _currentWaveIndex;
 
         [Inject]
         private void Construct(IEnemyFactory enemyFactory, INetworkPlayersHandler networkPlayersHandler)
@@ -31,57 +28,37 @@ namespace Code.Runtime.Logic.WaveSystem
 
         public void Initialize()
         {
-            WaveTimer = TickTimer.CreateFromSeconds(Runner, waveSeconds);
+            WaveConfig waveConfig = waveConfigs[_currentWaveIndex];
 
-            _spawnTime = GetRandomTime();
+            _waveStateMachine = new WaveStateMachine();
+
+            _waveStateMachine.RegisterState(new WaveBreakState(this, _waveStateMachine));
+            _waveStateMachine.RegisterState(new WaveSpawnState(this, _enemyFactory, _networkPlayersHandler,
+                _waveStateMachine));
+
+            _waveStateMachine.Enter<WaveBreakState, WaveConfig>(waveConfig);
         }
 
-        public float? GetCurrentWaveTime() =>
-            WaveTimer.RemainingTime(Runner);
+        public WaveConfig GetNextWaveConfig()
+        {
+            _currentWaveIndex++;
+
+            return waveConfigs[_currentWaveIndex];
+        }
 
         public override void FixedUpdateNetwork()
+        {
+            UpdateTimerText();
+
+            _waveStateMachine.UpdateState();
+        }
+
+        private void UpdateTimerText()
         {
             float? remainingTime = WaveTimer.RemainingTime(Runner);
 
             if (remainingTime != null)
-                _waveTimeTextView.RPC_UpdateTimer(remainingTime.Value);
-
-            if (WaveTimer.ExpiredOrNotRunning(Runner)) return;
-
-            _timeToSpawn += Runner.DeltaTime;
-
-            if (_timeToSpawn >= _spawnTime)
-            {
-                SpawnEnemy();
-
-                _timeToSpawn = 0f;
-                _spawnTime = GetRandomTime();
-            }
-        }
-
-        private void SpawnEnemy()
-        {
-            Vector3 randomPosition = new Vector3(Random.Range(0f, 10f), Random.Range(0, 10f));
-            BaseEnemyConfig enemyConfig = enemyConfigs[Random.Range(0, enemyConfigs.Length)];
-
-            Enemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.EnemyPrefab, randomPosition);
-            Transform targetPlayer = FindTargetPlayer();
-
-            enemy.Initialize(enemyConfig, targetPlayer);
-        }
-
-        private Transform FindTargetPlayer()
-        {
-            List<Transform> playersTransforms = _networkPlayersHandler.GetPlayersTransforms();
-
-            Transform targetPlayer = playersTransforms[Random.Range(0, playersTransforms.Count)];
-
-            return targetPlayer;
-        }
-
-        private float GetRandomTime()
-        {
-            return Random.Range(3f, 6f);
+                waveTimeTextView.RPC_UpdateTimer(remainingTime.Value);
         }
     }
 }

@@ -9175,12 +9175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84298ade5e174beb99baa1a7dab6280e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyConfigs:
-  - {fileID: 11400000, guid: 5fdfee36ab4e5fd419132a17d9064e37, type: 2}
-  - {fileID: 11400000, guid: ef02be0109ea553479c7a20c31cf36d0, type: 2}
-  - {fileID: 11400000, guid: 3d347ebcfdad4044dbc5f087a4098609, type: 2}
-  waveSeconds: 120
-  _waveTimeTextView: {fileID: 1501977649}
+  waveConfigs:
+  - {fileID: 11400000, guid: 8c97f33b185002146a15791c7068fdd3, type: 2}
+  - {fileID: 11400000, guid: decdea8b279b2f349bb0f67a6777e7ea, type: 2}
+  - {fileID: 11400000, guid: f522bc708ec1f074f810cd7a57538151, type: 2}
+  waveTimeTextView: {fileID: 1501977649}
 --- !u!4 &1481744287
 Transform:
   m_ObjectHideFlags: 0
