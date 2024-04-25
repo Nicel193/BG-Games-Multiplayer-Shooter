@@ -1,6 +1,7 @@
 using Code.Runtime.Infrastructure;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic.PlayerSystem;
+using Code.Runtime.Logic.WeaponSystem;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -19,9 +20,21 @@ namespace Code.Runtime.Installers
 
             Container.BindInstance(networkRunner);
 
+            BindPlayerFactory();
+            
+            BindWeaponFactory();
+        }
+
+        private void BindPlayerFactory()
+        {
             Container.BindInterfacesTo<PlayerFactory>().AsSingle();
         }
-        
+
+        private void BindWeaponFactory()
+        {
+            Container.BindInterfacesTo<WeaponFactory>().AsSingle();
+        }
+
         private void BindGameplayBootstrapper()
         {
             Container.Bind<GameplayStateMachine>().AsSingle();

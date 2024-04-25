@@ -16,4 +16,8 @@ MonoBehaviour:
   <PlayerPrefab>k__BackingField:
     RawGuidValue: 2280467eea38f6f49a4a9ac6be92fb50
   <CameraOffset>k__BackingField: {x: 0, y: 0, z: -10}
-  <SmoothSpeed>k__BackingField: 5
+  <CameraSmoothSpeed>k__BackingField: 5
+  weaponConfigs:
+  - {fileID: 11400000, guid: 60851470277b6eb488447b69920604a9, type: 2}
+  - {fileID: 11400000, guid: b30956792bc1bce4f9f80bad073de329, type: 2}
+  - {fileID: 11400000, guid: a0c6a8b7776eb5f41b9f107d96273163, type: 2}

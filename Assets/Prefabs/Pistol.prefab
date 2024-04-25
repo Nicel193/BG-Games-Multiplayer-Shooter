@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -114,11 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92931b528484f91ac96467aa0a28589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2539617988107825905, guid: f6949169aa151384f8990cdafcfa2e5b, type: 3}
   spawnBulletPoint: {fileID: 2388746751873109445}
-  damage: 5
-  shootForce: 10
-  shootInterval: 0.5
 --- !u!114 &1780884844983118557
 MonoBehaviour:
   m_ObjectHideFlags: 0

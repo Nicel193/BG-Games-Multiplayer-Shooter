@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573e314f1d9a44679a48acdd8ce9f2df, type: 3}
   m_Name: ShotgunConfig
   m_EditorClassIdentifier: 
-  <WeaponPrefab>k__BackingField: {fileID: 0}
-  <WeaponType>k__BackingField: 0
-  <BulletPrefab>k__BackingField: {fileID: 0}
-  <Damage>k__BackingField: 0
-  <ShootForce>k__BackingField: 0
-  <ShootInterval>k__BackingField: 0
+  <WeaponType>k__BackingField: 1
+  <WeaponPrefab>k__BackingField: {fileID: 4934363364958889341, guid: da5edf33156066f42ad712ef98824192, type: 3}
+  <BulletPrefab>k__BackingField: {fileID: 2539617988107825905, guid: f6949169aa151384f8990cdafcfa2e5b, type: 3}
+  <Damage>k__BackingField: 2
+  <ShootForce>k__BackingField: 5
+  <ShootInterval>k__BackingField: 0.5
   <PelletsCount>k__BackingField: 5
   <SpreadAngle>k__BackingField: 30

@@ -15,7 +15,7 @@ namespace Code.Runtime.Logic.WeaponSystem
         private float _shootInterval;
         private float _shootTimer;
         
-        public void Initialize(BaseWeaponConfig baseWeaponConfig)
+        public virtual void Initialize(BaseWeaponConfig baseWeaponConfig)
         {
             BulletPrefab = baseWeaponConfig.BulletPrefab;
             Damage = baseWeaponConfig.Damage;

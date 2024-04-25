@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82d65722c8f4cffb2987ac7fb040ed0, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  <WeaponPrefab>k__BackingField: {fileID: 685287594071621040, guid: d0d8560b86ab0e04ab9d5c6477f6ea57, type: 3}
   <WeaponType>k__BackingField: 2
+  <WeaponPrefab>k__BackingField: {fileID: 4605666892800776816, guid: 64fc86f727a04c7489307b15f5a18c1b, type: 3}
   <BulletPrefab>k__BackingField: {fileID: 2539617988107825905, guid: f6949169aa151384f8990cdafcfa2e5b, type: 3}
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 3
   <ShootForce>k__BackingField: 10
-  <ShootInterval>k__BackingField: 0.2
+  <ShootInterval>k__BackingField: 0.1

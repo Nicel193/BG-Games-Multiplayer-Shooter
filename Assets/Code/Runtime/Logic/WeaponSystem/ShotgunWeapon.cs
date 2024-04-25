@@ -8,8 +8,17 @@ namespace Code.Runtime.Logic.WeaponSystem
         private int _pelletsCount;
         private float _spreadAngle;
 
-        public void Initialize(ShotgunConfig shotgunConfig)
+        public override void Initialize(BaseWeaponConfig baseWeaponConfig)
         {
+            if (baseWeaponConfig is not ShotgunConfig)
+            {
+                Debug.LogError("Not valid weapon config");
+                
+                return;
+            }
+
+            ShotgunConfig shotgunConfig = (ShotgunConfig)baseWeaponConfig;
+
             _pelletsCount = shotgunConfig.PelletsCount;
             _spreadAngle = shotgunConfig.SpreadAngle;
             
