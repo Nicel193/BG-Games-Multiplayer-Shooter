@@ -9,6 +9,11 @@ namespace Code.Runtime.Configs
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig")]
     public class PlayerConfig : ScriptableObject
     {
+        [field: Header("Stats")]
+        [field: SerializeField] public int MaxAmmo  { get; private set; }
+        [field: SerializeField] public int MaxHealth  { get; private set; }
+        
+        [field: Header("Move")]
         [field: SerializeField] public float MoveSpeed { get; private set; }
         [field: SerializeField] public NetworkPrefabRef PlayerPrefab { get; private set; }
 

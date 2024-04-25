@@ -18,6 +18,7 @@ namespace Code.Runtime.Logic.PlayerSystem
         [Rpc]
         public void RPC_Damage(int damage)
         {
+            
         }
     }
 }

@@ -70,6 +70,7 @@ namespace Code.Runtime.Logic.WaveSystem
             BaseEnemyConfig enemyConfig = _waveEnemies[Random.Range(0, _waveEnemies.Length)];
 
             Enemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.EnemyPrefab, randomPosition);
+
             Transform targetPlayer = FindTargetPlayer();
 
             enemy.Initialize(enemyConfig, targetPlayer);

@@ -1,4 +1,5 @@
 using Code.Runtime.Configs;
+using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
 using UnityEngine;
 
@@ -12,9 +13,10 @@ namespace Code.Runtime.Logic.WeaponSystem.Types
         protected int Damage;
         protected int ShootForce;
 
+        private PlayerData _playerData;
         private float _shootInterval;
         private float _shootTimer;
-        
+
         public virtual void Initialize(BaseWeaponConfig baseWeaponConfig)
         {
             BulletPrefab = baseWeaponConfig.BulletPrefab;

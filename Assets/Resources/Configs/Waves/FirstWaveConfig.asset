@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a208d1747794427ae659a57327d7e27, type: 3}
   m_Name: FirstWaveConfig
   m_EditorClassIdentifier: 
-  <BreakTime>k__BackingField: 3
-  <Duration>k__BackingField: 4
+  <BreakTime>k__BackingField: 10
+  <Duration>k__BackingField: 60
   <WaveEnemies>k__BackingField:
   - {fileID: 11400000, guid: 3d347ebcfdad4044dbc5f087a4098609, type: 2}
