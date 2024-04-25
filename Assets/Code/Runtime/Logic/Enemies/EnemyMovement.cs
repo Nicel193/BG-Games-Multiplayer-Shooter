@@ -22,7 +22,6 @@ namespace Code.Runtime.Logic.Enemies
             if (_target != null)
             {
                 Vector3 direction = (_target.position - transform.position).normalized;
-            
                 float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
 
                 if (distanceToPlayer > _stoppingDistance)

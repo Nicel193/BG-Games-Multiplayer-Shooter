@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Zombie
   m_EditorClassIdentifier: 
   <BaseEnemyPrefab>k__BackingField: {fileID: 6262901623101361191, guid: 94e6c355f49c50b49a4b0da80293de5d, type: 3}
-  <MoveSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 1.5
   <StoppingDistance>k__BackingField: 1
   <MaxHealth>k__BackingField: 10
   <Damage>k__BackingField: 2

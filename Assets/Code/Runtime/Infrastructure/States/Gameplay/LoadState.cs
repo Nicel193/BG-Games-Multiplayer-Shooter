@@ -31,8 +31,7 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
             NetworkObject playerObject = _playerFactory.SpawnPlayer(playerRef);
 
             _networkPlayersHandler.AddNetworkPlayer(playerRef, playerObject);
-            _cameraFollow.SetTarget(playerObject.transform);
-            
+
             InitializeWaveSystem(playerRef);
 
             _gameplayStateMachine.Enter<GameLoopState>();

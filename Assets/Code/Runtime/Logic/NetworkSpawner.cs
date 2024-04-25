@@ -24,9 +24,7 @@ namespace Code.Runtime.Logic
             if (Runner.IsServer)
             {
                 NetworkObject networkPlayerObject = _playerFactory.SpawnPlayer(playerRef);
-                
-                _cameraFollow.SetTarget(networkPlayerObject.transform);
-
+  
                 _spawnedCharacters.Add(playerRef, networkPlayerObject);
                 // ememySpawner.Initialize(networkPlayerObject.transform);
             }
