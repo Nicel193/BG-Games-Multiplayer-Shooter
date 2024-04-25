@@ -49,10 +49,5 @@ namespace Code.Runtime.Logic.Enemies
                 Runner.Despawn(networkObject);
             }
         }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            Debug.Log(other.transform.name);
-        }
     }
 }

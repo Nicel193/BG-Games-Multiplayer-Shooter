@@ -24,10 +24,8 @@ namespace Code.Runtime.Logic.WeaponSystem
             _bulletRigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            Debug.Log(other.transform.name);
-            
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.Damage(_damage);
