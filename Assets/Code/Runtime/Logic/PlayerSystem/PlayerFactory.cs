@@ -35,7 +35,7 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
 
-            playerDeathHandler.Initialize(weapon, _networkPlayersHandler);
+            playerDeathHandler.Initialize(_networkPlayersHandler);
             weapon.transform.SetParent(playerObject.transform);
 
             return playerObject;

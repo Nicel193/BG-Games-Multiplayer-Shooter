@@ -9,7 +9,6 @@ namespace Code.Runtime.Logic.PlayerSystem
     {
         private const float DeadPlayerSpriteAlpha = 0.3f;
         
-        private BaseWeapon _weapon;
         private PlayerData _playerData;
         private SpriteRenderer _spriteRenderer;
         private INetworkPlayersHandler _networkPlayersHandler;
@@ -26,19 +25,27 @@ namespace Code.Runtime.Logic.PlayerSystem
         private void OnDestroy() =>
             _playerData.OnPlayerDead -= RPC_PlayerDead;
 
-        public void Initialize(BaseWeapon weapon, INetworkPlayersHandler networkPlayersHandler)
+        public void Initialize(INetworkPlayersHandler networkPlayersHandler)
         {
             _networkPlayersHandler = networkPlayersHandler;
-            _weapon = weapon;
         }
 
         [Rpc]
-        public void RPC_PlayerDead()
+        private void RPC_PlayerDead()
         {
-            _weapon.gameObject.SetActive(false);
+            DisableWeapon();
             ChangeSpriteAlpha();
+
+            if (!Runner.IsClient) _networkPlayersHandler.RemoveActivePlayer(GetComponent<NetworkObject>());
+        }
+
+        private void DisableWeapon()
+        {
+            BaseWeapon weapon = GetComponentInChildren<BaseWeapon>();
+
+            if(weapon == null) return;
             
-            _networkPlayersHandler.RemoveActivePlayer(GetComponent<NetworkObject>());
+            weapon.gameObject.SetActive(false);
         }
 
         private void ChangeSpriteAlpha()
