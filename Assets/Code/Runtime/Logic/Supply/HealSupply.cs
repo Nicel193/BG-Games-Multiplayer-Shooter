@@ -12,6 +12,8 @@ namespace Code.Runtime.Logic.Supply
             if (other.TryGetComponent(out PlayerData playerData))
             {
                 playerData.AddHp(heal);
+                
+                Despawn();
             }
         }
     }

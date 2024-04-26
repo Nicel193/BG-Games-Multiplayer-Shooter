@@ -7,7 +7,6 @@ namespace Code.Runtime.Logic.Supply
 {
     public class BombSupply : BaseSupply
     {
-        [SerializeField] private NetworkObject networkObject;
         [SerializeField] private CircleCollider2D damageZoneCollider;
         [SerializeField] private DamageZone damageZone;
         [SerializeField] private float damageRadius;
@@ -31,8 +30,10 @@ namespace Code.Runtime.Logic.Supply
             
             _timerToDespawn += Runner.DeltaTime;
 
-            if (_timerToDespawn >= timeToDespawn)
-                Runner.Despawn(networkObject);
+
+            Debug.Log(_timerToDespawn);
+            
+            if (_timerToDespawn >= timeToDespawn) Despawn();
         }
 
         protected override void PickUpImplementation(Collider2D other)
