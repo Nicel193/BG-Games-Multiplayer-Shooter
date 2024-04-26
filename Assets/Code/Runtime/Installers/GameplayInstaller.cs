@@ -37,6 +37,8 @@ namespace Code.Runtime.Installers
             BindWaveHandler();
 
             BindEnemyFactory();
+
+            Container.Bind<WaveStateMachine>().AsSingle();
         }
 
         private void BindEnemyFactory()

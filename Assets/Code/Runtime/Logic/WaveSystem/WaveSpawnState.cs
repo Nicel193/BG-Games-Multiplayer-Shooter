@@ -48,8 +48,8 @@ namespace Code.Runtime.Logic.WaveSystem
         {
             if (_waveHandler.WaveTimer.Expired(_networkRunner))
             {
-                _waveStateMachine.Enter<WaveBreakState, WaveConfig>(_waveHandler.GetNextWaveConfig());
-                
+                NextState();
+
                 return;
             }
 
@@ -62,6 +62,14 @@ namespace Code.Runtime.Logic.WaveSystem
                 _timeToSpawn = 0f;
                 _spawnTime = GetRandomTime();
             }
+        }
+
+        private void NextState()
+        {
+            if (_waveHandler.IsLastWave())
+                _waveStateMachine.Enter<EndWavesState>();
+            else
+                _waveStateMachine.Enter<WaveBreakState, WaveConfig>(_waveHandler.GetNextWaveConfig());
         }
 
         private void SpawnEnemy()

@@ -1,7 +1,6 @@
 using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
@@ -38,6 +37,7 @@ namespace Code.Runtime.Logic.PlayerSystem
         {
             _weapon.gameObject.SetActive(false);
             ChangeSpriteAlpha();
+            
             _networkPlayersHandler.RemoveActivePlayer(GetComponent<NetworkObject>());
         }
 

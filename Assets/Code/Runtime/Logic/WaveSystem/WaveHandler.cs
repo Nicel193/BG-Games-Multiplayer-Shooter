@@ -1,4 +1,5 @@
 using Code.Runtime.Configs;
+using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic.Enemies;
 using Code.Runtime.UI;
 using Fusion;
@@ -17,12 +18,16 @@ namespace Code.Runtime.Logic.WaveSystem
         private IEnemyFactory _enemyFactory;
         private INetworkPlayersHandler _networkPlayersHandler;
         private WaveStateMachine _waveStateMachine;
+        private GameplayStateMachine _gameplayStateMachine;
         private int _currentWaveIndex;
 
         [Inject]
-        private void Construct(IEnemyFactory enemyFactory, INetworkPlayersHandler networkPlayersHandler)
+        private void Construct(IEnemyFactory enemyFactory, INetworkPlayersHandler networkPlayersHandler,
+            WaveStateMachine waveStateMachine, GameplayStateMachine gameplayStateMachine)
         {
+            _gameplayStateMachine = gameplayStateMachine;
             _networkPlayersHandler = networkPlayersHandler;
+            _waveStateMachine = waveStateMachine;
             _enemyFactory = enemyFactory;
         }
 
@@ -30,14 +35,16 @@ namespace Code.Runtime.Logic.WaveSystem
         {
             WaveConfig waveConfig = waveConfigs[_currentWaveIndex];
 
-            _waveStateMachine = new WaveStateMachine();
-
             _waveStateMachine.RegisterState(new WaveBreakState(this, _waveStateMachine));
             _waveStateMachine.RegisterState(new WaveSpawnState(this, _enemyFactory, _networkPlayersHandler,
                 _waveStateMachine));
+            _waveStateMachine.RegisterState(new EndWavesState(_gameplayStateMachine));
 
             _waveStateMachine.Enter<WaveBreakState, WaveConfig>(waveConfig);
         }
+
+        public bool IsLastWave() =>
+            _currentWaveIndex == waveConfigs.Length - 1;
 
         public WaveConfig GetNextWaveConfig()
         {

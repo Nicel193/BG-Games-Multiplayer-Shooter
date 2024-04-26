@@ -4,6 +4,7 @@ using System.Linq;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Infrastructure.States.Gameplay;
 using Code.Runtime.Logic.PlayerSystem;
+using Code.Runtime.Logic.WaveSystem;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -14,13 +15,15 @@ namespace Code.Runtime.Logic
     {
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private List<NetworkObject> _activePlayers = new List<NetworkObject>();
-
+        
+        private WaveStateMachine _waveStateMachine;
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
-        private void Construct(GameplayStateMachine gameplayStateMachine)
+        private void Construct(GameplayStateMachine gameplayStateMachine, WaveStateMachine waveStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
+            _waveStateMachine = waveStateMachine;
         }
 
         public void AddNetworkPlayer(PlayerRef player, NetworkObject playerObject)
@@ -32,6 +35,9 @@ namespace Code.Runtime.Logic
         public void RemoveActivePlayer(NetworkObject playerObject)
         {
             _activePlayers.Remove(playerObject);
+
+            if (_activePlayers.Count == 0)
+                _waveStateMachine.Enter<EndWavesState>();
         }
 
         public List<Transform> GetActivePlayersTransforms()
@@ -40,7 +46,7 @@ namespace Code.Runtime.Logic
                 .Select(networkObject => networkObject.transform)
                 .ToList();
         }
-        
+
         public void PlayerJoined(PlayerRef player)
         {
             if (!Runner.IsServer) return;
