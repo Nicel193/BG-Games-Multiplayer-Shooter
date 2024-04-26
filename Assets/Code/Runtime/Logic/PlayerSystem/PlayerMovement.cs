@@ -9,19 +9,18 @@ namespace Code.Runtime.Logic.PlayerSystem
     [RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimator))]
     public class PlayerMovement : NetworkBehaviour
     {
-        private PlayerAnimator _playerAnimator;
+        private const int OppositeAngle = 180;
         
+        private PlayerAnimator _playerAnimator;
         private float _moveSpeed;
         
         private void Awake() =>
             _playerAnimator = GetComponent<PlayerAnimator>();
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig)
-        {
+        private void Construct(PlayerConfig playerConfig) =>
             _moveSpeed = playerConfig.MoveSpeed;
-        }
-        
+
         public override void FixedUpdateNetwork()
         {
             if (GetInput(out NetworkInputData data))
@@ -29,7 +28,7 @@ namespace Code.Runtime.Logic.PlayerSystem
                 data.MoveDirection.Normalize();
                 data.ShootDirection.Normalize();
 
-                float playerRotation = data.ShootDirection.x >= 0 ? 0 : 180;
+                float playerRotation = data.ShootDirection.x >= 0 ? 0 : OppositeAngle;
                 Vector3 direction = Runner.DeltaTime * 5f * data.MoveDirection;
                 
                 transform.eulerAngles = new Vector3(0f, playerRotation, 0f);

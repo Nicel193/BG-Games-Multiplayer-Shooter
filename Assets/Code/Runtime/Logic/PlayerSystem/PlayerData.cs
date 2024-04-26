@@ -1,3 +1,4 @@
+using System;
 using Fusion;
 using UnityEngine;
 
@@ -5,12 +6,14 @@ namespace Code.Runtime.Logic.PlayerSystem
 {
     public class PlayerData : NetworkBehaviour
     {
-        [Networked] public int MAXAmmo { get; private set;}
-        [Networked] public int MAXHeath { get; private set;}
-        [Networked] public int Health { get; private set; }
-        [Networked] public int KillsCount { get; private set; }
-        [Networked] public int TotalDamage { get; private set; }
-        [Networked] public int Ammo { get; private set; }
+        public event Action OnPlayerDead;
+        
+        [field: HideInInspector] [Networked] public int MAXAmmo { get; private set;}
+        [field: HideInInspector] [Networked] public int MAXHeath { get; private set;}
+        [field: HideInInspector] [Networked] public int Health { get; private set; }
+        [field: HideInInspector] [Networked] public int KillsCount { get; private set; }
+        [field: HideInInspector] [Networked] public int TotalDamage { get; private set; }
+        [field: HideInInspector] [Networked] public int Ammo { get; private set; }
 
         [Rpc]
         public void RPC_Initialize(int maxAmmo, int maxHeath)
@@ -52,12 +55,12 @@ namespace Code.Runtime.Logic.PlayerSystem
             Health -= damage;
 
             Health = Mathf.Clamp(Health, 0, MAXHeath);
+            
+            if(Health == 0) OnPlayerDead?.Invoke();
         }
 
-        public void AddKill()
-        {
+        public void AddKill() =>
             KillsCount++;
-        }
 
         public void AddTotalDamage(int damage)
         {
@@ -65,5 +68,8 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             TotalDamage += damage;
         }
+
+        public bool IsDeath() =>
+            Health <= 0;
     }
 }

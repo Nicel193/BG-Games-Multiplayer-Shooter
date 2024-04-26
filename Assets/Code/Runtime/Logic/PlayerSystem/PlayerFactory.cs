@@ -1,8 +1,10 @@
+using System.Diagnostics.Tracing;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
@@ -11,9 +13,12 @@ namespace Code.Runtime.Logic.PlayerSystem
         private NetworkRunner _networkRunner;
         private PlayerConfig _playerConfig;
         private IWeaponFactory _weaponFactory;
+        private INetworkPlayersHandler _networkPlayersHandler;
 
-        PlayerFactory(NetworkRunner networkRunner, PlayerConfig playerConfig, IWeaponFactory weaponFactory)
+        PlayerFactory(NetworkRunner networkRunner, PlayerConfig playerConfig,
+            IWeaponFactory weaponFactory, INetworkPlayersHandler networkPlayersHandler)
         {
+            _networkPlayersHandler = networkPlayersHandler;
             _weaponFactory = weaponFactory;
             _networkRunner = networkRunner;
             _playerConfig = playerConfig;
@@ -25,16 +30,18 @@ namespace Code.Runtime.Logic.PlayerSystem
                 Quaternion.identity, playerRef);
 
             PlayerData playerData = playerObject.GetComponent<PlayerData>();
+            PlayerDeathHandler playerDeathHandler = playerObject.GetComponent<PlayerDeathHandler>();
             playerData.RPC_Initialize(10, 10);
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
-            
+
+            playerDeathHandler.Initialize(weapon, _networkPlayersHandler);
             weapon.transform.SetParent(playerObject.transform);
 
             return playerObject;
         }
 
         private WeaponType GetRandomWeaponType() =>
-            (WeaponType)Random.Range(0, _playerConfig.GetWeaponsConfigs().Count);
+            (WeaponType) Random.Range(0, _playerConfig.GetWeaponsConfigs().Count);
     }
 }

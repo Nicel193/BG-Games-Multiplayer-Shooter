@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Infrastructure.States.Gameplay;
+using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ namespace Code.Runtime.Logic
     public class NetworkPlayersHandler : NetworkBehaviour, IPlayerJoined, IPlayerLeft, INetworkPlayersHandler
     {
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+        private List<NetworkObject> _activePlayers = new List<NetworkObject>();
 
         private GameplayStateMachine _gameplayStateMachine;
 
@@ -21,12 +23,20 @@ namespace Code.Runtime.Logic
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        public void AddNetworkPlayer(PlayerRef player, NetworkObject playerObject) =>
-            _spawnedCharacters.Add(player, playerObject);
-
-        public List<Transform> GetPlayersTransforms()
+        public void AddNetworkPlayer(PlayerRef player, NetworkObject playerObject)
         {
-            return _spawnedCharacters.Values
+            _spawnedCharacters.Add(player, playerObject);
+            _activePlayers.Add(playerObject);
+        }
+
+        public void RemoveActivePlayer(NetworkObject playerObject)
+        {
+            _activePlayers.Remove(playerObject);
+        }
+
+        public List<Transform> GetActivePlayersTransforms()
+        {
+            return _activePlayers
                 .Select(networkObject => networkObject.transform)
                 .ToList();
         }

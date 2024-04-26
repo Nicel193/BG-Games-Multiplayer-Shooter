@@ -99,11 +99,12 @@ GameObject:
   - component: {fileID: 8552403016945617436}
   - component: {fileID: 4359441007817186888}
   - component: {fileID: 1174070015285481444}
+  - component: {fileID: 1567358686709196608}
+  - component: {fileID: 8663199541682641512}
   - component: {fileID: 6414348022218877696}
   - component: {fileID: -7674658158458679858}
   - component: {fileID: 3019655254164222177}
   - component: {fileID: 7717870987416724918}
-  - component: {fileID: 1567358686709196608}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -287,6 +288,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f8be3e6b41dac4e9ce8b7c055202a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1567358686709196608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925259629719052124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1009545f801455990c6113ad2ef76e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MAXAmmo: 0
+  _MAXHeath: 0
+  _Health: 0
+  _KillsCount: 0
+  _TotalDamage: 0
+  _Ammo: 0
+--- !u!114 &8663199541682641512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925259629719052124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d6c2babf024b3ebd6188cebc126f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6414348022218877696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,9 +349,10 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4359441007817186888}
   - {fileID: 1174070015285481444}
+  - {fileID: 1567358686709196608}
+  - {fileID: 8663199541682641512}
   - {fileID: 3019655254164222177}
   - {fileID: 7717870987416724918}
-  - {fileID: 1567358686709196608}
 --- !u!114 &3019655254164222177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,24 +387,6 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 0000000020e23b685928a8ce2b1a167c794069552afa8626a8b5caa3
   TriggerHashes: 000000002afa8626
---- !u!114 &1567358686709196608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3925259629719052124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1009545f801455990c6113ad2ef76e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MAXAmmo: 0
-  _MAXHeath: 0
-  _Health: 0
-  _KillsCount: 0
-  _TotalDamage: 0
-  _Ammo: 0
 --- !u!1 &8391421101145327137
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,11 @@ namespace Code.Runtime.Logic.PlayerSystem
     [RequireComponent(typeof(PlayerData))]
     public class Player : NetworkBehaviour, IDamageable
     {
-        private PlayerData PlayerData { get; set; }
-
+        private PlayerData _playerData;
+        
         private void Awake()
         {
-            PlayerData = GetComponent<PlayerData>();
+            _playerData = GetComponent<PlayerData>();
         }
 
         public override void Spawned()
@@ -18,18 +18,18 @@ namespace Code.Runtime.Logic.PlayerSystem
             if (Object.HasInputAuthority)
             {
                 FindObjectOfType<CameraFollow>()?.SetTarget(transform);
-                FindObjectOfType<PlayerDataView>()?.Initialize(PlayerData);
+                FindObjectOfType<PlayerDataView>()?.Initialize(_playerData);
             }
         }
         
         [Rpc]
         private void RPC_Damage(int damage) =>
-            PlayerData.Damage(damage);
+            _playerData.Damage(damage);
 
         public void Damage(int damage) =>
             RPC_Damage(damage);
 
         public bool IsDead() =>
-            PlayerData.Health == 0;
+            _playerData.IsDeath();
     }
 }

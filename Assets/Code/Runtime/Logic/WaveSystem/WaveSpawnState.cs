@@ -78,7 +78,7 @@ namespace Code.Runtime.Logic.WaveSystem
 
         private Transform FindTargetPlayer()
         {
-            List<Transform> playersTransforms = _networkPlayersHandler.GetPlayersTransforms();
+            List<Transform> playersTransforms = _networkPlayersHandler.GetActivePlayersTransforms();
 
             Transform targetPlayer = playersTransforms[Random.Range(0, playersTransforms.Count)];
 
