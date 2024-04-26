@@ -38,7 +38,7 @@ namespace Code.Runtime.Logic.WaveSystem
             _waveStateMachine.RegisterState(new WaveBreakState(this, _waveStateMachine));
             _waveStateMachine.RegisterState(new WaveSpawnState(this, _enemyFactory, _networkPlayersHandler,
                 _waveStateMachine));
-            _waveStateMachine.RegisterState(new EndWavesState(_gameplayStateMachine));
+            _waveStateMachine.RegisterState(new EndWavesState(this, _gameplayStateMachine));
 
             _waveStateMachine.Enter<WaveBreakState, WaveConfig>(waveConfig);
         }

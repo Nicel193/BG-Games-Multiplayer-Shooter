@@ -5,6 +5,7 @@ using Code.Runtime.Logic.Enemies;
 using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.WaveSystem;
 using Code.Runtime.Logic.WeaponSystem;
+using Code.Runtime.UI.Windows;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -16,8 +17,9 @@ namespace Code.Runtime.Installers
         [SerializeField] private NetworkRunner networkRunner; 
         [SerializeField] private NetworkPlayersHandler networkPlayersHandler; 
         [SerializeField] private CameraFollow cameraFollow; 
-        [SerializeField] private WaveHandler waveHandler; 
-        
+        [SerializeField] private WaveHandler waveHandler;
+        [SerializeField] private EndGameWindow endGameWindow;
+
         public override void InstallBindings()
         {
             BindGameplayBootstrapper();
@@ -39,6 +41,8 @@ namespace Code.Runtime.Installers
             BindEnemyFactory();
 
             Container.Bind<WaveStateMachine>().AsSingle();
+
+            Container.Bind<IEndGameWindow>().FromInstance(endGameWindow).AsSingle();
         }
 
         private void BindEnemyFactory()

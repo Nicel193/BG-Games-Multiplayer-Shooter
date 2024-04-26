@@ -22,6 +22,8 @@ namespace Code.Runtime.Logic.WaveSystem
         private float _timeToSpawn;
         private float _spawnTime;
 
+        private List<NetworkObject> _enemies = new List<NetworkObject>();
+
         public WaveSpawnState(WaveHandler waveHandler, IEnemyFactory enemyFactory,
             INetworkPlayersHandler networkPlayersHandler, WaveStateMachine waveStateMachine)
         {
@@ -42,6 +44,10 @@ namespace Code.Runtime.Logic.WaveSystem
 
         public void Exit()
         {
+            foreach (NetworkObject enemy  in _enemies)
+                _networkRunner.Despawn(enemy);
+            
+            _enemies.Clear();
         }
 
         public void Update()
@@ -78,9 +84,9 @@ namespace Code.Runtime.Logic.WaveSystem
             BaseEnemyConfig enemyConfig = _waveEnemies[Random.Range(0, _waveEnemies.Length)];
 
             Enemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.EnemyPrefab, randomPosition);
+            _enemies.Add(enemy.GetComponent<NetworkObject>());
 
             Transform targetPlayer = FindTargetPlayer();
-
             enemy.Initialize(enemyConfig, targetPlayer);
         }
 

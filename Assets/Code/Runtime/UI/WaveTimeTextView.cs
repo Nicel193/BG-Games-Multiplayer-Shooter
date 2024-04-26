@@ -1,8 +1,6 @@
-using Code.Runtime.Logic.WaveSystem;
 using Fusion;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Runtime.UI
 {

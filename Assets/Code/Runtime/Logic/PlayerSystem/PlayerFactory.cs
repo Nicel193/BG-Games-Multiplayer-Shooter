@@ -31,7 +31,7 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             PlayerData playerData = playerObject.GetComponent<PlayerData>();
             PlayerDeathHandler playerDeathHandler = playerObject.GetComponent<PlayerDeathHandler>();
-            playerData.RPC_Initialize(10, 10);
+            playerData.RPC_Initialize(10, 10, playerRef.PlayerId);
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
 

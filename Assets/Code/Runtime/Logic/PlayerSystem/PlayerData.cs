@@ -8,6 +8,7 @@ namespace Code.Runtime.Logic.PlayerSystem
     {
         public event Action OnPlayerDead;
         
+        [field: HideInInspector] [Networked] public int PlayerId { get; private set;}
         [field: HideInInspector] [Networked] public int MAXAmmo { get; private set;}
         [field: HideInInspector] [Networked] public int MAXHeath { get; private set;}
         [field: HideInInspector] [Networked] public int Health { get; private set; }
@@ -16,15 +17,14 @@ namespace Code.Runtime.Logic.PlayerSystem
         [field: HideInInspector] [Networked] public int Ammo { get; private set; }
 
         [Rpc]
-        public void RPC_Initialize(int maxAmmo, int maxHeath)
+        public void RPC_Initialize(int maxAmmo, int maxHeath, int playerId)
         {
             MAXAmmo = maxAmmo;
             MAXHeath = maxHeath;
+            PlayerId = playerId;
 
             Ammo = MAXAmmo;
             Health = MAXHeath;
-            KillsCount = 0;
-            TotalDamage = 0;
         }
 
         public void UseAmmo()

@@ -46,6 +46,14 @@ namespace Code.Runtime.Logic
                 .Select(networkObject => networkObject.transform)
                 .ToList();
         }
+        
+        public List<PlayerData> GetPlayersData()
+        {
+            return _spawnedCharacters
+                .Values
+                .Select(networkObject => networkObject.GetComponent<PlayerData>())
+                .ToList();
+        }
 
         public void PlayerJoined(PlayerRef player)
         {
