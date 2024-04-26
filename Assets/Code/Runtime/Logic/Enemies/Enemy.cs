@@ -25,6 +25,8 @@ namespace Code.Runtime.Logic.Enemies
         {
             _enemyMovement.Initialize(baseEnemyConfig, target, enemyAnimator.transform);
             enemyAttack.Initialize(baseEnemyConfig, target, _enemyMovement);
+
+            _health = baseEnemyConfig.MaxHealth;
         }
         
         public void Damage(int damage)
@@ -35,7 +37,7 @@ namespace Code.Runtime.Logic.Enemies
 
             enemyAnimator.PlayHit();
 
-            if (_health <= 0)
+            if (IsDead())
             {
                 if (TryGetComponent(out NetworkObject networkObject))
                 {

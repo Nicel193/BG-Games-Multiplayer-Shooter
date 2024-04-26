@@ -10,8 +10,8 @@ namespace Code.Runtime.Logic.WeaponSystem
     {
         private Rigidbody2D _bulletRigidbody2D;
         private NetworkObject _networkObject;
-        private int _damage;
         private Action<bool> _onDamage;
+        private int _damage;
 
         private void Awake()
         {
@@ -27,7 +27,8 @@ namespace Code.Runtime.Logic.WeaponSystem
         public void Launch(Vector2 direction, float force, Action<bool> onDamage = null)
         {
             direction.Normalize();
-
+            
+            _onDamage = onDamage;
             _bulletRigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
         }
 
@@ -35,6 +36,8 @@ namespace Code.Runtime.Logic.WeaponSystem
         {
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
+                if(damageable.IsDead()) return;
+                
                 damageable.Damage(_damage);
                 
                 _onDamage?.Invoke(damageable.IsDead());

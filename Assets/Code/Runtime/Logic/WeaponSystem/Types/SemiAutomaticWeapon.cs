@@ -1,7 +1,6 @@
-using Code.Runtime.Logic.WeaponSystem.Types;
 using UnityEngine;
 
-namespace Code.Runtime.Logic.WeaponSystem
+namespace Code.Runtime.Logic.WeaponSystem.Types
 {
     public class SemiAutomaticWeapon : BaseWeapon
     {
@@ -10,7 +9,7 @@ namespace Code.Runtime.Logic.WeaponSystem
             IBullet bullet = Runner.Spawn(BulletPrefab, spawnBulletPoint.position, Quaternion.identity);
             
             bullet.Initialize(Damage);
-            bullet.Launch(direction, ShootForce);
+            bullet.Launch(direction, ShootForce, OnDamage);
         }
     }
 }

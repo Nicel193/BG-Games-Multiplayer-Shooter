@@ -1,26 +1,39 @@
+using Fusion;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
-    public class PlayerData
+    public class PlayerData : NetworkBehaviour
     {
-        private readonly int _maxAmmo;
-        private readonly int _maxHeath;
+        [Networked] public int MAXAmmo { get; private set;}
+        [Networked] public int MAXHeath { get; private set;}
+        [Networked] public int Health { get; private set; }
+        [Networked] public int KillsCount { get; private set; }
+        [Networked] public int TotalDamage { get; private set; }
+        [Networked] public int Ammo { get; private set; }
 
-        public int Health { get; private set; }
-        public int KillsCount { get; private set; }
-        public int TotalDamage { get; private set; }
-        public int Ammo { get; private set; }
-
-        public PlayerData(int maxAmmo, int maxHeath)
+        [Rpc]
+        public void RPC_Initialize(int maxAmmo, int maxHeath)
         {
-            _maxAmmo = maxAmmo;
-            _maxHeath = maxHeath;
+            MAXAmmo = maxAmmo;
+            MAXHeath = maxHeath;
+
+            Ammo = MAXAmmo;
+            Health = MAXHeath;
+            KillsCount = 0;
+            TotalDamage = 0;
+        }
+
+        public void UseAmmo()
+        {
+            if(Ammo <= 0) return;
+            
+            Ammo--;
         }
 
         public void RestoreAmmo()
         {
-            Ammo = _maxAmmo;
+            Ammo = MAXAmmo;
         }
 
         public void AddHp(int hp)
@@ -29,7 +42,16 @@ namespace Code.Runtime.Logic.PlayerSystem
             
             Health += hp;
 
-            Health = Mathf.Clamp(Health, 0, _maxHeath);
+            Health = Mathf.Clamp(Health, 0, MAXHeath);
+        }
+        
+        public void Damage(int damage)
+        {
+            if(damage <= 0) return;
+            
+            Health -= damage;
+
+            Health = Mathf.Clamp(Health, 0, MAXHeath);
         }
 
         public void AddKill()

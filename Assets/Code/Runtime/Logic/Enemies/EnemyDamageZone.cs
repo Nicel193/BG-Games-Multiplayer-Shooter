@@ -1,8 +1,8 @@
-using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
 using UnityEngine;
+using Code.Runtime.Logic.PlayerSystem;
 
-namespace Code.Runtime.Logic
+namespace Code.Runtime.Logic.Enemies
 {
     public class EnemyDamageZone : NetworkBehaviour
     {
@@ -15,9 +15,9 @@ namespace Code.Runtime.Logic
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.TryGetComponent(out Player playerHeath))
+            if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                playerHeath.RPC_Damage(_damage);
+                damageable.Damage(_damage);
             }
         }
     }

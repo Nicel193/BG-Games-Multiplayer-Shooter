@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Runtime.Configs;
+using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
@@ -20,13 +21,13 @@ namespace Code.Runtime.Logic.WeaponSystem
             _baseWeaponConfigs = playerConfig.GetWeaponsConfigs();
         }
 
-        public BaseWeapon SpawnWeapon(WeaponType weaponType, PlayerRef playerRef)
+        public BaseWeapon SpawnWeapon(WeaponType weaponType, PlayerRef playerRef, PlayerData playerData)
         {
             BaseWeaponConfig baseWeaponConfig = _baseWeaponConfigs[weaponType];
             BaseWeapon baseWeapon = _networkRunner.Spawn(baseWeaponConfig.WeaponPrefab, Vector3.zero,
                 Quaternion.identity, playerRef);
 
-            baseWeapon.Initialize(baseWeaponConfig);
+            baseWeapon.Initialize(baseWeaponConfig, playerData);
 
             _diContainer.Inject(baseWeapon);
 

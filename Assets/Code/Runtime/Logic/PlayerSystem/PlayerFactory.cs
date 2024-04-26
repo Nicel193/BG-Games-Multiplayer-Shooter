@@ -24,7 +24,10 @@ namespace Code.Runtime.Logic.PlayerSystem
             NetworkObject playerObject = _networkRunner.Spawn(_playerConfig.PlayerPrefab, Vector3.zero,
                 Quaternion.identity, playerRef);
 
-            BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef);
+            PlayerData playerData = playerObject.GetComponent<PlayerData>();
+            playerData.RPC_Initialize(10, 10);
+
+            BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
             
             weapon.transform.SetParent(playerObject.transform);
 
