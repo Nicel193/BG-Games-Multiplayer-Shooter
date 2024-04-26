@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bc7fb73b1241a3a54d50cd28f8bece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkObject: {fileID: 7531043410015555417}
   heal: 10
 --- !u!114 &7531043410015555417
 MonoBehaviour:
