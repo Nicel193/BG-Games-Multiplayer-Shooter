@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.WeaponSystem
@@ -5,6 +6,6 @@ namespace Code.Runtime.Logic.WeaponSystem
     public interface IBullet
     {
         void Initialize(int damage);
-        void Move(Vector2 direction, float force);
+        void Launch(Vector2 direction, float force, Action<bool> onDamage = null);
     }
 }

@@ -36,7 +36,7 @@ namespace Code.Runtime.Logic.WeaponSystem
                 Vector2 randomDirection = Quaternion.Euler(0, 0, Random.Range(-_spreadAngle, _spreadAngle)) * direction;
 
                 bullet.Initialize(Damage);
-                bullet.Move(randomDirection, ShootForce);
+                bullet.Launch(randomDirection, ShootForce);
             }
         }
     }

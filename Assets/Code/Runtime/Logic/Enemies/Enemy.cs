@@ -46,5 +46,7 @@ namespace Code.Runtime.Logic.Enemies
                 }
             }
         }
+
+        public bool IsDead() => _health <= 0;
     }
 }

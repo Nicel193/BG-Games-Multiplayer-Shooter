@@ -10,7 +10,7 @@ namespace Code.Runtime.Logic.WeaponSystem
             IBullet bullet = Runner.Spawn(BulletPrefab, spawnBulletPoint.position, Quaternion.identity);
             
             bullet.Initialize(Damage);
-            bullet.Move(direction, ShootForce);
+            bullet.Launch(direction, ShootForce);
         }
     }
 }
