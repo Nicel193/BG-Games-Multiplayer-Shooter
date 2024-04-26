@@ -5,11 +5,11 @@ namespace Code.Runtime.Logic.Enemies
     public class MeleeEnemyAttack : EnemyAttack
     {
         [SerializeField] private EnemyAnimator enemyAnimator;
-        [SerializeField] private EnemyDamageZone enemyDamageZone;
+        [SerializeField] private DamageZone damageZone;
         
         protected override void AttackImplementation()
         {
-            enemyDamageZone.SetDamage(Damage);
+            damageZone.SetDamage(Damage);
             enemyAnimator.PlayAttack();
         }
     }

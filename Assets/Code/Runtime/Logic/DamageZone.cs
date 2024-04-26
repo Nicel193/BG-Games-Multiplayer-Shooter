@@ -1,10 +1,10 @@
+using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
 using UnityEngine;
-using Code.Runtime.Logic.PlayerSystem;
 
-namespace Code.Runtime.Logic.Enemies
+namespace Code.Runtime.Logic
 {
-    public class EnemyDamageZone : NetworkBehaviour
+    public class DamageZone : NetworkBehaviour
     {
         private int _damage;
 

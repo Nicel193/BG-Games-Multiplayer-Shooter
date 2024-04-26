@@ -1,10 +1,8 @@
-using System.Diagnostics.Tracing;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Logic.WeaponSystem.Types;
 using Fusion;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Runtime.Logic.PlayerSystem
 {
