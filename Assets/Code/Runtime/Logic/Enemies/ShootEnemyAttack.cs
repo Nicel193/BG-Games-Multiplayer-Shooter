@@ -13,7 +13,7 @@ namespace Code.Runtime.Logic.Enemies
             Vector3 direction = (Target.position - transform.position).normalized;
             Bullet bullet = Runner.Spawn(bulletPrefab, transform.position, Quaternion.identity);
             
-            bullet.Move(direction, shootForce);
+            bullet.Launch(direction, shootForce);
         }
     }
 }
