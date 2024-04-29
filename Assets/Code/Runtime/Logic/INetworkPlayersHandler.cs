@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Runtime.Logic.PlayerSystem;
 using Fusion;
@@ -11,5 +12,6 @@ namespace Code.Runtime.Logic
         List<Transform> GetActivePlayersTransforms();
         void RemoveActivePlayer(NetworkObject playerObject);
         List<PlayerData> GetPlayersData();
+        event Action OnPlayerJoined;
     }
 }

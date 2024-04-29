@@ -7,6 +7,7 @@ using Code.Runtime.Logic.Supply;
 using Code.Runtime.Logic.WaveSystem;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Services.InputService;
+using Code.Runtime.UI;
 using Code.Runtime.UI.Windows;
 using Fusion;
 using UnityEngine;
@@ -17,11 +18,10 @@ namespace Code.Runtime.Installers
     public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private NetworkPlayersHandler networkPlayersHandler;
-        [SerializeField] private CameraFollow cameraFollow;
         [SerializeField] private WaveHandler waveHandler;
         [SerializeField] private EndGameWindow endGameWindow;
         [SerializeField] private MobileInput mobileInput;
-
+        
         public override void InstallBindings()
         {
             BindGameplayBootstrapper();
@@ -33,8 +33,6 @@ namespace Code.Runtime.Installers
             BindWeaponFactory();
 
             BindNetworkPlayersHandler();
-
-            BindCameraFollow();
 
             BindWaveHandler();
 
@@ -81,12 +79,7 @@ namespace Code.Runtime.Installers
         {
             Container.BindInterfacesTo<WaveHandler>().FromInstance(waveHandler).AsSingle();
         }
-
-        private void BindCameraFollow()
-        {
-            Container.Bind<ICameraFollow>().FromInstance(cameraFollow).AsSingle();
-        }
-
+        
         private void BindNetworkPlayersHandler()
         {
             Container.Bind<INetworkPlayersHandler>().FromInstance(networkPlayersHandler);

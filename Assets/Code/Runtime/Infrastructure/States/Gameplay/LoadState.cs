@@ -2,6 +2,7 @@ using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.WaveSystem;
+using Code.Runtime.UI;
 using ExitGames.Client.Photon.StructWrapping;
 using Fusion;
 using UnityEngine;
@@ -13,14 +14,12 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
         private INetworkPlayersHandler _networkPlayersHandler;
         private IPlayerFactory _playerFactory;
         private GameplayStateMachine _gameplayStateMachine;
-        private ICameraFollow _cameraFollow;
         private IWaveHandler _waveHandler;
 
         public LoadState(INetworkPlayersHandler networkPlayersHandler, IPlayerFactory playerFactory,
-            GameplayStateMachine gameplayStateMachine, ICameraFollow cameraFollow, IWaveHandler waveHandler)
+            GameplayStateMachine gameplayStateMachine, IWaveHandler waveHandler)
         {
             _waveHandler = waveHandler;
-            _cameraFollow = cameraFollow;
             _gameplayStateMachine = gameplayStateMachine;
             _playerFactory = playerFactory;
             _networkPlayersHandler = networkPlayersHandler;
@@ -33,7 +32,7 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
             _networkPlayersHandler.AddNetworkPlayer(playerRef, playerObject);
 
             InitializeWaveSystem(playerRef);
-
+            
             _gameplayStateMachine.Enter<GameLoopState>();
         }
 

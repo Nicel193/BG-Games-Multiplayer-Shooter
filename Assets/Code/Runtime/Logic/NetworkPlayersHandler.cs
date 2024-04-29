@@ -13,6 +13,8 @@ namespace Code.Runtime.Logic
 {
     public class NetworkPlayersHandler : NetworkBehaviour, IPlayerJoined, IPlayerLeft, INetworkPlayersHandler
     {
+        public event Action OnPlayerJoined;
+        
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private List<NetworkObject> _activePlayers = new List<NetworkObject>();
         
@@ -58,6 +60,8 @@ namespace Code.Runtime.Logic
         public void PlayerJoined(PlayerRef player)
         {
             if (!Runner.IsServer) return;
+            
+            OnPlayerJoined?.Invoke();
 
             _gameplayStateMachine.Enter<LoadState, PlayerRef>(player);
         }
