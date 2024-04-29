@@ -4,18 +4,31 @@ using Code.Runtime.Services.InputService;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 namespace Code.Runtime.Logic
 {
     public class NetworkRunnerCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     {
+        private NetworkRunner _networkRunner;
         private IInputService _inputService;
 
+        private void OnEnable(){
+            if(_networkRunner != null){
+                _networkRunner.AddCallbacks( this );
+            }
+        }
+
+        private void OnDisable(){
+            if(_networkRunner != null){
+                _networkRunner.RemoveCallbacks( this );
+            }
+        }
+
         [Inject]
-        public void Construct(IInputService inputService)
+        public void Construct(IInputService inputService, NetworkRunner networkRunner)
         {
+            _networkRunner = networkRunner;
             _inputService = inputService;
         }
 

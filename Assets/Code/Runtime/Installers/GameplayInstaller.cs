@@ -16,7 +16,6 @@ namespace Code.Runtime.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [SerializeField] private NetworkRunner networkRunner;
         [SerializeField] private NetworkPlayersHandler networkPlayersHandler;
         [SerializeField] private CameraFollow cameraFollow;
         [SerializeField] private WaveHandler waveHandler;
@@ -28,9 +27,7 @@ namespace Code.Runtime.Installers
             BindGameplayBootstrapper();
 
             BindStatesFactory();
-
-            Container.BindInstance(networkRunner);
-
+            
             BindPlayerFactory();
 
             BindWeaponFactory();
@@ -43,13 +40,23 @@ namespace Code.Runtime.Installers
 
             BindEnemyFactory();
 
-            Container.Bind<WaveStateMachine>().AsSingle();
+            BindWaveStateMachine();
 
-            Container.Bind<IEndGameWindow>().FromInstance(endGameWindow).AsSingle();
+            BindEndGameWindow();
 
             BindSupplyFactory();
 
             BindInput();
+        }
+
+        private void BindWaveStateMachine()
+        {
+            Container.Bind<WaveStateMachine>().AsSingle();
+        }
+
+        private void BindEndGameWindow()
+        {
+            Container.Bind<IEndGameWindow>().FromInstance(endGameWindow).AsSingle();
         }
 
         private void BindInput()

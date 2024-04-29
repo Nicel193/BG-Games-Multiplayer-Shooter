@@ -9,7 +9,7 @@ namespace Code.Runtime.Infrastructure.Bootstrappers
         {
              InitializeGameStateMachine();
              
-             DontDestroyOnLoad(this.gameObject);
+             DontDestroyOnLoad(gameObject);
         }
 
         private void InitializeGameStateMachine()
@@ -17,6 +17,7 @@ namespace Code.Runtime.Infrastructure.Bootstrappers
             _gameStateMachine.RegisterState(_statesFactory.Create<BootstrapState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<LoadGameplayState>());
             
             _gameStateMachine.Enter<BootstrapState>();
         }
