@@ -13,15 +13,19 @@ namespace Code.Runtime.Logic
         private NetworkRunner _networkRunner;
         private IInputService _inputService;
 
-        private void OnEnable(){
-            if(_networkRunner != null){
-                _networkRunner.AddCallbacks( this );
+        private void OnEnable()
+        {
+            if (_networkRunner != null)
+            {
+                _networkRunner.AddCallbacks(this);
             }
         }
 
-        private void OnDisable(){
-            if(_networkRunner != null){
-                _networkRunner.RemoveCallbacks( this );
+        private void OnDisable()
+        {
+            if (_networkRunner != null)
+            {
+                _networkRunner.RemoveCallbacks(this);
             }
         }
 
@@ -43,48 +47,80 @@ namespace Code.Runtime.Logic
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
             NetworkInputData data = new NetworkInputData();
-            
+
             _inputService.UpdateInputData();
 
             data.MoveDirection = _inputService.MoveDirection;
             data.ShootDirection = _inputService.ShootDirection;
             data.IsShoot = _inputService.IsShoot;
-            
+
             input.Set(data);
         }
 
-        public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+        public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
+        {
+        }
 
-        public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
+        public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
+        {
+        }
 
-        public void OnConnectedToServer(NetworkRunner runner) { }
+        public void OnConnectedToServer(NetworkRunner runner)
+        {
+        }
 
-        public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) { }
+        public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
+        {
+        }
 
         public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request,
-            byte[] token) { }
+            byte[] token)
+        {
+        }
 
-        public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+        public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
+        {
+        }
 
-        public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+        public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
+        {
+        }
 
-        public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
+        public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+        {
+        }
 
-        public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
+        public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data)
+        {
+        }
 
-        public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
+        public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+        {
+        }
 
-        public void OnSceneLoadDone(NetworkRunner runner) { }
+        public void OnSceneLoadDone(NetworkRunner runner)
+        {
+        }
 
-        public void OnSceneLoadStart(NetworkRunner runner) { }
+        public void OnSceneLoadStart(NetworkRunner runner)
+        {
+        }
 
-        public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+        public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
+        {
+        }
 
-        public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+        public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
+        {
+        }
 
         public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key,
-            ArraySegment<byte> data) { }
+            ArraySegment<byte> data)
+        {
+        }
 
-        public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
+        public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
+        {
+        }
     }
 }

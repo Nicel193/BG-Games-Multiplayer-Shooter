@@ -9,8 +9,8 @@ namespace Code.Runtime.Logic.WaveSystem
 {
     public class WaveSpawnState : WaveSuppliesState
     {
-        private const float MinTimeToSpawnEnemy = 10f;
-        private const float MaxTimeToSpawnEnemy = 20f;
+        private const float MinTimeToSpawnEnemy = 3f;
+        private const float MaxTimeToSpawnEnemy = 6f;
         
         private WaveHandler _waveHandler;
         private NetworkRunner _networkRunner;

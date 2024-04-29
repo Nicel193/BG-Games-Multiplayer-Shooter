@@ -41,12 +41,19 @@ namespace Code.Runtime.Logic.Enemies
             {
                 if (TryGetComponent(out NetworkObject networkObject))
                 {
-                    enemyAnimator.PlayDeath();
-                    _enemyMovement.StopMove();
-
-                    _enemyCollider.enabled = false;
+                    RPC_Dead();
                 }
             }
+        }
+
+        [Rpc]
+        private void RPC_Dead()
+        {
+            enemyAnimator.PlayDeath();
+
+            _enemyMovement.enabled = false;
+            _enemyCollider.enabled = false;
+            enemyAttack.enabled = false;
         }
 
         public bool IsDead() => _health <= 0;

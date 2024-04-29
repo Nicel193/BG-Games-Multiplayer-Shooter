@@ -22,9 +22,6 @@ namespace Code.Runtime.Logic.Enemies
             _target = target;
         }
 
-        public void StopMove() =>
-            _moveSpeed = 0;
-
         public override void FixedUpdateNetwork()
         {
             if (_target != null)

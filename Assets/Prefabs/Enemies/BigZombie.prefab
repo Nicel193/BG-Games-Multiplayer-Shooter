@@ -558,6 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 8974196913301483832}
   damageZone: {fileID: 6541242209861465557}
+  weapon: {fileID: 587147163406270225}
 --- !u!114 &1206201664116177341
 MonoBehaviour:
   m_ObjectHideFlags: 0

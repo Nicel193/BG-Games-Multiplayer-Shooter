@@ -5324,7 +5324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Change skin
+  m_text: Change Skin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28f92cfe97de66d4bb20b9483c9e7be8, type: 2}
   m_sharedMaterial: {fileID: -1430742620568496599, guid: 28f92cfe97de66d4bb20b9483c9e7be8, type: 2}
