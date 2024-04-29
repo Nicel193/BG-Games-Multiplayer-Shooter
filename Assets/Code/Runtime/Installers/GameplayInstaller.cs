@@ -6,6 +6,7 @@ using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.Supply;
 using Code.Runtime.Logic.WaveSystem;
 using Code.Runtime.Logic.WeaponSystem;
+using Code.Runtime.Services.InputService;
 using Code.Runtime.UI.Windows;
 using Fusion;
 using UnityEngine;
@@ -15,11 +16,12 @@ namespace Code.Runtime.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [SerializeField] private NetworkRunner networkRunner; 
-        [SerializeField] private NetworkPlayersHandler networkPlayersHandler; 
-        [SerializeField] private CameraFollow cameraFollow; 
+        [SerializeField] private NetworkRunner networkRunner;
+        [SerializeField] private NetworkPlayersHandler networkPlayersHandler;
+        [SerializeField] private CameraFollow cameraFollow;
         [SerializeField] private WaveHandler waveHandler;
         [SerializeField] private EndGameWindow endGameWindow;
+        [SerializeField] private MobileInput mobileInput;
 
         public override void InstallBindings()
         {
@@ -30,11 +32,11 @@ namespace Code.Runtime.Installers
             Container.BindInstance(networkRunner);
 
             BindPlayerFactory();
-            
+
             BindWeaponFactory();
 
             BindNetworkPlayersHandler();
-            
+
             BindCameraFollow();
 
             BindWaveHandler();
@@ -46,6 +48,16 @@ namespace Code.Runtime.Installers
             Container.Bind<IEndGameWindow>().FromInstance(endGameWindow).AsSingle();
 
             BindSupplyFactory();
+
+            BindInput();
+        }
+
+        private void BindInput()
+        {
+            // if (Application.isMobilePlatform)
+                Container.BindInterfacesTo<MobileInput>().FromInstance(mobileInput).AsSingle();
+            // else
+                // Container.BindInterfacesTo<PCInputService>().AsSingle();
         }
 
         private void BindSupplyFactory()
@@ -87,7 +99,7 @@ namespace Code.Runtime.Installers
         {
             Container.Bind<GameplayStateMachine>().AsSingle();
         }
-        
+
         private void BindStatesFactory()
         {
             Container.BindInterfacesTo<StatesFactory>().AsSingle();
