@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 66704708037718284}
   - component: {fileID: 4555171490384105009}
   - component: {fileID: 7531043410015555417}
+  - component: {fileID: 2903665755822819203}
   m_Layer: 7
   m_Name: HealSupply
   m_TagString: Untagged
@@ -145,7 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkObject: {fileID: 7531043410015555417}
-  heal: 10
 --- !u!114 &7531043410015555417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +164,20 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 4555171490384105009}
+  - {fileID: 2903665755822819203}
+--- !u!114 &2903665755822819203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9198614322991835299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0

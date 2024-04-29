@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a208d1747794427ae659a57327d7e27, type: 3}
   m_Name: FirstWaveConfig
   m_EditorClassIdentifier: 
+  <SpawnRadius>k__BackingField: 15
   <BreakTime>k__BackingField: 10
   <Duration>k__BackingField: 60
   <WaveEnemies>k__BackingField:
   - {fileID: 11400000, guid: 3d347ebcfdad4044dbc5f087a4098609, type: 2}
+  <WaveSupplies>k__BackingField:
+  - {fileID: 11400000, guid: a2314fcd824a2514bbf9135e870f480f, type: 2}

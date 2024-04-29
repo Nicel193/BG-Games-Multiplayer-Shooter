@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5265634655555244246}
   - component: {fileID: 3902994352638793524}
   - component: {fileID: 2229987222552883064}
+  - component: {fileID: 8144047063563565591}
   m_Layer: 7
   m_Name: AmmoSupply
   m_TagString: Untagged
@@ -163,3 +164,20 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3902994352638793524}
+  - {fileID: 8144047063563565591}
+--- !u!114 &8144047063563565591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162129630834825204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c76dad978943d994a9db4c67f99a7b, type: 3}
+  m_Name: AmmoSupplyConfig
+  m_EditorClassIdentifier: 
+  <SupplyPrefab>k__BackingField: {fileID: 3902994352638793524, guid: 0f7781ec875256c498d3b56dff898e97, type: 3}
+  <AmmoCount>k__BackingField: 30

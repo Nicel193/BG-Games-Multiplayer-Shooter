@@ -11,8 +11,9 @@ namespace Code.Runtime.Logic.Enemies
         protected override void AttackImplementation()
         {
             Vector3 direction = (Target.position - transform.position).normalized;
-            Bullet bullet = Runner.Spawn(bulletPrefab, transform.position, Quaternion.identity);
+            IBullet bullet = Runner.Spawn(bulletPrefab, transform.position, Quaternion.identity);
             
+            bullet.Initialize(Damage);
             bullet.Launch(direction, shootForce);
         }
     }

@@ -4,11 +4,6 @@ using Zenject;
 
 namespace Code.Runtime.Logic.Enemies
 {
-    public interface IEnemyFactory
-    {
-        Enemy SpawnEnemy(Enemy enemyPrefab, Vector3 at);
-    }
-
     public class EnemyFactory : IEnemyFactory
     {
         private DiContainer _diContainer;

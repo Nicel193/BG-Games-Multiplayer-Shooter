@@ -1,6 +1,7 @@
 using Code.Runtime.Configs;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic.Enemies;
+using Code.Runtime.Logic.Supply;
 using Code.Runtime.UI;
 using Fusion;
 using UnityEngine;
@@ -17,14 +18,16 @@ namespace Code.Runtime.Logic.WaveSystem
 
         private IEnemyFactory _enemyFactory;
         private INetworkPlayersHandler _networkPlayersHandler;
+        private ISupplyFactory _supplyFactory;
         private WaveStateMachine _waveStateMachine;
         private GameplayStateMachine _gameplayStateMachine;
         private int _currentWaveIndex;
 
         [Inject]
         private void Construct(IEnemyFactory enemyFactory, INetworkPlayersHandler networkPlayersHandler,
-            WaveStateMachine waveStateMachine, GameplayStateMachine gameplayStateMachine)
+            WaveStateMachine waveStateMachine, GameplayStateMachine gameplayStateMachine, ISupplyFactory supplyFactory)
         {
+            _supplyFactory = supplyFactory;
             _gameplayStateMachine = gameplayStateMachine;
             _networkPlayersHandler = networkPlayersHandler;
             _waveStateMachine = waveStateMachine;
@@ -35,8 +38,8 @@ namespace Code.Runtime.Logic.WaveSystem
         {
             WaveConfig waveConfig = waveConfigs[_currentWaveIndex];
 
-            _waveStateMachine.RegisterState(new WaveBreakState(this, _waveStateMachine));
-            _waveStateMachine.RegisterState(new WaveSpawnState(this, _enemyFactory, _networkPlayersHandler,
+            _waveStateMachine.RegisterState(new WaveBreakState(_supplyFactory,this, _waveStateMachine));
+            _waveStateMachine.RegisterState(new WaveSpawnState(_supplyFactory, this, _enemyFactory, _networkPlayersHandler,
                 _waveStateMachine));
             _waveStateMachine.RegisterState(new EndWavesState(this, _gameplayStateMachine));
 

@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using Code.Runtime.Configs;
-using Code.Runtime.Infrastructure.States;
 using Code.Runtime.Logic.Enemies;
+using Code.Runtime.Logic.Supply;
 using Fusion;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.WaveSystem
 {
-    public class WaveSpawnState : IPayloadedState<WaveConfig>, IUpdatebleState
+    public class WaveSpawnState : WaveSuppliesState
     {
-        private const float MinTimeToSpawnEnemy = 3f;
-        private const float MaxTimeToSpawnEnemy = 6f;
-
+        private const float MinTimeToSpawnEnemy = 10f;
+        private const float MaxTimeToSpawnEnemy = 20f;
+        
         private WaveHandler _waveHandler;
         private NetworkRunner _networkRunner;
 
@@ -19,13 +19,14 @@ namespace Code.Runtime.Logic.WaveSystem
         private IEnemyFactory _enemyFactory;
         private WaveStateMachine _waveStateMachine;
         private BaseEnemyConfig[] _waveEnemies;
+        
         private float _timeToSpawn;
         private float _spawnTime;
 
         private List<NetworkObject> _enemies = new List<NetworkObject>();
 
-        public WaveSpawnState(WaveHandler waveHandler, IEnemyFactory enemyFactory,
-            INetworkPlayersHandler networkPlayersHandler, WaveStateMachine waveStateMachine)
+        public WaveSpawnState(ISupplyFactory supplyFactory, WaveHandler waveHandler, IEnemyFactory enemyFactory,
+            INetworkPlayersHandler networkPlayersHandler, WaveStateMachine waveStateMachine) : base(supplyFactory, waveHandler)
         {
             _waveStateMachine = waveStateMachine;
             _networkPlayersHandler = networkPlayersHandler;
@@ -34,23 +35,27 @@ namespace Code.Runtime.Logic.WaveSystem
             _networkRunner = _waveHandler.Runner;
         }
 
-        public void Enter(WaveConfig waveConfig)
+        public override void Enter(WaveConfig waveConfig)
         {
             _waveHandler.WaveTimer = TickTimer.CreateFromSeconds(_networkRunner, waveConfig.Duration);
 
             _waveEnemies = waveConfig.WaveEnemies;
-            _spawnTime = GetRandomTime();
+            _spawnTime = GetRandomTime(MinTimeToSpawnEnemy, MaxTimeToSpawnEnemy);
+            
+            base.Enter(waveConfig);
         }
 
-        public void Exit()
+        public override void Exit()
         {
             foreach (NetworkObject enemy  in _enemies)
                 _networkRunner.Despawn(enemy);
-            
+
             _enemies.Clear();
+            
+            base.Exit();
         }
 
-        public void Update()
+        public override void Update()
         {
             if (_waveHandler.WaveTimer.Expired(_networkRunner))
             {
@@ -66,8 +71,10 @@ namespace Code.Runtime.Logic.WaveSystem
                 SpawnEnemy();
 
                 _timeToSpawn = 0f;
-                _spawnTime = GetRandomTime();
+                _spawnTime = GetRandomTime(MinTimeToSpawnEnemy, MaxTimeToSpawnEnemy);
             }
+            
+            base.Update();
         }
 
         private void NextState()
@@ -80,7 +87,7 @@ namespace Code.Runtime.Logic.WaveSystem
 
         private void SpawnEnemy()
         {
-            Vector3 randomPosition = new Vector3(Random.Range(0f, 10f), Random.Range(0, 10f));
+            Vector3 randomPosition = Random.insideUnitCircle * SpawnRadius;
             BaseEnemyConfig enemyConfig = _waveEnemies[Random.Range(0, _waveEnemies.Length)];
 
             Enemy enemy = _enemyFactory.SpawnEnemy(enemyConfig.EnemyPrefab, randomPosition);
@@ -97,11 +104,6 @@ namespace Code.Runtime.Logic.WaveSystem
             Transform targetPlayer = playersTransforms[Random.Range(0, playersTransforms.Count)];
 
             return targetPlayer;
-        }
-
-        private float GetRandomTime()
-        {
-            return Random.Range(MinTimeToSpawnEnemy, MaxTimeToSpawnEnemy);
         }
     }
 }
