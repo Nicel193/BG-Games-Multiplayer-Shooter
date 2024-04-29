@@ -34,9 +34,13 @@ namespace Code.Runtime.Logic.PlayerSystem
             Ammo--;
         }
 
-        public void RestoreAmmo()
+        public void RestoreAmmo(int ammoCount)
         {
-            Ammo = MAXAmmo;
+            if(ammoCount <= 0) return;
+            
+            Ammo += ammoCount;
+            
+            Ammo = Mathf.Clamp(Ammo, 0, MAXAmmo);
         }
 
         public void AddHp(int hp)

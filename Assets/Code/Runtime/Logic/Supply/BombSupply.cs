@@ -1,6 +1,5 @@
-using Code.Runtime.Logic.Enemies;
+using Code.Runtime.Configs.Supplies;
 using Code.Runtime.Logic.PlayerSystem;
-using Fusion;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.Supply
@@ -9,19 +8,31 @@ namespace Code.Runtime.Logic.Supply
     {
         [SerializeField] private CircleCollider2D damageZoneCollider;
         [SerializeField] private DamageZone damageZone;
-        [SerializeField] private float damageRadius;
-        [SerializeField] private float timeToDespawn;
-        [SerializeField] private int damage;
-
+        
+        private float _damageRadius;
+        private float _timeToDespawn;
+        private int _damage;
+        
         private bool _isExplode;
         private float _timerToDespawn;
-        
+
+
         private void Awake()
         {
-            damageZoneCollider.radius = damageRadius;
+            damageZoneCollider.radius = _damageRadius;
             damageZoneCollider.enabled = false;
             
-            damageZone.SetDamage(damage);
+            damageZone.SetDamage(_damage);
+        }
+
+        public override void Initialize(BaseSupplyConfig supplyConfig)
+        {
+            if (supplyConfig is BombSupplyConfig bombSupplyConfig)
+            {
+                _damageRadius = bombSupplyConfig.DamageRadius;
+                _timeToDespawn = bombSupplyConfig.TimeToDespawn;
+                _damage = bombSupplyConfig.Damage;
+            }
         }
 
         public override void FixedUpdateNetwork()
@@ -33,7 +44,7 @@ namespace Code.Runtime.Logic.Supply
 
             Debug.Log(_timerToDespawn);
             
-            if (_timerToDespawn >= timeToDespawn) Despawn();
+            if (_timerToDespawn >= _timeToDespawn) Despawn();
         }
 
         protected override void PickUpImplementation(Collider2D other)

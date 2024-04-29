@@ -3,6 +3,7 @@ using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.Enemies;
 using Code.Runtime.Logic.PlayerSystem;
+using Code.Runtime.Logic.Supply;
 using Code.Runtime.Logic.WaveSystem;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.UI.Windows;
@@ -43,6 +44,13 @@ namespace Code.Runtime.Installers
             Container.Bind<WaveStateMachine>().AsSingle();
 
             Container.Bind<IEndGameWindow>().FromInstance(endGameWindow).AsSingle();
+
+            BindSupplyFactory();
+        }
+
+        private void BindSupplyFactory()
+        {
+            Container.BindInterfacesTo<SupplyFactory>().AsSingle();
         }
 
         private void BindEnemyFactory()
