@@ -5,6 +5,8 @@ namespace Code.Runtime.Infrastructure.States.Core
 {
     public class LoadGameplayState : IPayloadedState<(string sessionName, GameMode gameMode)>
     {
+        private const int MaxSessionPlayers = 3;
+        
         private NetworkRunner _networkRunner;
         private ISceneLoader _sceneLoader;
         private GameMode _gameMode;
@@ -40,16 +42,12 @@ namespace Code.Runtime.Infrastructure.States.Core
                 GameMode = _gameMode,
                 SessionName = _sessionName,
                 Scene = scene,
+                PlayerCount = MaxSessionPlayers,
                 // SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }
 
         public void Exit()
-        {
-            
-        }
-
-        public void Enter()
         {
             
         }

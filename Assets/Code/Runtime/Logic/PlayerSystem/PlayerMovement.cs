@@ -16,9 +16,13 @@ namespace Code.Runtime.Logic.PlayerSystem
         private void Awake() =>
             _playerAnimator = GetComponent<PlayerAnimator>();
 
-        [Inject]
-        private void Construct(PlayerConfig playerConfig) =>
+        public override void Spawned()
+        {
+            DiContainer diContainer = FindObjectOfType<SceneContext>().Container;
+            PlayerConfig playerConfig = diContainer.Resolve<PlayerConfig>();
+
             _moveSpeed = playerConfig.MoveSpeed;
+        }
 
         public override void FixedUpdateNetwork()
         {
@@ -28,11 +32,11 @@ namespace Code.Runtime.Logic.PlayerSystem
                 data.ShootDirection.Normalize();
 
                 float playerRotation = data.ShootDirection.x >= 0 ? 0 : OppositeAngle;
-                Vector3 direction = Runner.DeltaTime * 5f * data.MoveDirection;
+                Vector3 direction = Runner.DeltaTime * _moveSpeed * data.MoveDirection;
                 
                 transform.eulerAngles = new Vector3(0f, playerRotation, 0f);
                 transform.position += direction;
-                
+
                 PlayAnimation(data.MoveDirection);
             }
         }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Code.Runtime.Configs;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Logic.WeaponSystem.Types;
@@ -12,6 +14,7 @@ namespace Code.Runtime.Logic.PlayerSystem
         private PlayerConfig _playerConfig;
         private IWeaponFactory _weaponFactory;
         private INetworkPlayersHandler _networkPlayersHandler;
+        private List<WeaponType> _usedWeapons = new List<WeaponType>();
 
         PlayerFactory(NetworkRunner networkRunner, PlayerConfig playerConfig,
             IWeaponFactory weaponFactory, INetworkPlayersHandler networkPlayersHandler)
@@ -29,7 +32,7 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             PlayerData playerData = playerObject.GetComponent<PlayerData>();
             PlayerDeathHandler playerDeathHandler = playerObject.GetComponent<PlayerDeathHandler>();
-            playerData.RPC_Initialize(10, 10, playerRef.PlayerId);
+            playerData.RPC_Initialize(_playerConfig.MaxAmmo, _playerConfig.MaxHealth, playerRef.PlayerId);
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
 
@@ -39,7 +42,16 @@ namespace Code.Runtime.Logic.PlayerSystem
             return playerObject;
         }
 
-        private WeaponType GetRandomWeaponType() =>
-            (WeaponType) Random.Range(0, _playerConfig.GetWeaponsConfigs().Count);
+        private WeaponType GetRandomWeaponType()
+        {
+            List<WeaponType> availableWeapons = _playerConfig.GetWeaponsConfigs()
+                .Where(weapon => !_usedWeapons.Contains(weapon.Key))
+                .Select(weapon => weapon.Key)
+                .ToList();
+            
+            WeaponType randomWeapon = availableWeapons[Random.Range(0, availableWeapons.Count)];
+            _usedWeapons.Add(randomWeapon);
+            return randomWeapon;
+        }
     }
 }

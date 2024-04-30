@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e109e5b315406d934eb5b170983d8d, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
+  <MaxAmmo>k__BackingField: 30
+  <MaxHealth>k__BackingField: 10
   <MoveSpeed>k__BackingField: 5
   <PlayerPrefab>k__BackingField:
     RawGuidValue: 2280467eea38f6f49a4a9ac6be92fb50

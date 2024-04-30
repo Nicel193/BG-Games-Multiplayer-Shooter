@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Code.Runtime.Infrastructure.StateMachines;
-using Code.Runtime.Infrastructure.States;
-using Code.Runtime.Infrastructure.States.Core;
 using Code.Runtime.Services.InputService;
 using Fusion;
 using Fusion.Sockets;
@@ -11,11 +9,10 @@ using Zenject;
 
 namespace Code.Runtime.Logic
 {
-    public class NetworkRunnerCallbacks : MonoBehaviour, INetworkRunnerCallbacks
+    public class NetworkRunnerCallbacksHandler : MonoBehaviour, INetworkRunnerCallbacks
     {
         private NetworkRunner _networkRunner;
         private IInputService _inputService;
-        private GameStateMachine _gameStateMachine;
 
         private void OnEnable()
         {
@@ -34,9 +31,8 @@ namespace Code.Runtime.Logic
         }
 
         [Inject]
-        public void Construct(IInputService inputService, NetworkRunner networkRunner, GameStateMachine gameStateMachine)
+        public void Construct(IInputService inputService, NetworkRunner networkRunner)
         {
-            _gameStateMachine = gameStateMachine;
             _networkRunner = networkRunner;
             _inputService = inputService;
         }
