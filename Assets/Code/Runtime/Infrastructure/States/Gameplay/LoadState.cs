@@ -11,12 +11,10 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
         private INetworkPlayersHandler _networkPlayersHandler;
         private IPlayerFactory _playerFactory;
         private GameplayStateMachine _gameplayStateMachine;
-        private IWaveHandler _waveHandler;
 
         public LoadState(INetworkPlayersHandler networkPlayersHandler, IPlayerFactory playerFactory,
-            GameplayStateMachine gameplayStateMachine, IWaveHandler waveHandler)
+            GameplayStateMachine gameplayStateMachine)
         {
-            _waveHandler = waveHandler;
             _gameplayStateMachine = gameplayStateMachine;
             _playerFactory = playerFactory;
             _networkPlayersHandler = networkPlayersHandler;
@@ -27,16 +25,7 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
             NetworkObject playerObject = _playerFactory.SpawnPlayer(playerRef);
 
             _networkPlayersHandler.AddNetworkPlayer(playerRef, playerObject);
-
-            InitializeWaveSystem(playerRef);
-            
-            _gameplayStateMachine.Enter<GameLoopState>();
-        }
-
-        private void InitializeWaveSystem(PlayerRef playerRef)
-        {
-            if (playerRef.PlayerId == 1)
-                _waveHandler.Initialize();
+            _gameplayStateMachine.Enter<WaitingPlayersState, PlayerRef>(playerRef);
         }
 
         public void Exit() { }

@@ -16,14 +16,8 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
             _networkPlayersHandler = networkPlayersHandler;
         }
         
-        public void Enter()
-        {
-            Debug.Log("Loading start!!!");
-        }
+        public void Enter() { }
 
-        public void Exit()
-        {
-            Debug.Log("Loading end!!!");
-        }
+        public void Exit() { }
     }
 }

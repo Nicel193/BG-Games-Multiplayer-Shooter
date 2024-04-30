@@ -25,8 +25,8 @@ namespace Code.Runtime.Infrastructure.Bootstrappers
         {
             _gameplayStateMachine.RegisterState(_statesFactory.Create<LoadingState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<LoadState>());
-            _gameplayStateMachine.RegisterState(_statesFactory.Create<GameLoopState>());
             _gameplayStateMachine.RegisterState(_statesFactory.Create<EndGameState>());
+            _gameplayStateMachine.RegisterState(_statesFactory.Create<WaitingPlayersState>());
             
             _gameplayStateMachine.Enter<LoadingState>();
         }

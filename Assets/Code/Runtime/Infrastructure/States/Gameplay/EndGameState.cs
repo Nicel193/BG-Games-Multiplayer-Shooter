@@ -33,8 +33,6 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
                 .ToArray();
             
             _endGameWindow.RPC_Open(playersStats);
-            
-            Debug.Log("End Game");
         }
 
         public void Exit()
