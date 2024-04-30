@@ -2,6 +2,7 @@
 using Code.Runtime.Infrastructure.Bootstrappers;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Interactors;
+using Code.Runtime.Repositories;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -27,6 +28,8 @@ namespace Code.Runtime.Installers
             BindInteractorContainer();
 
             BindNetworkRunner();
+
+            Container.Bind<UserRepository>().AsSingle();
         }
 
         private void BindNetworkRunner()

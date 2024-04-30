@@ -61,9 +61,9 @@ namespace Code.Runtime.Logic
         {
             if (!Runner.IsServer) return;
             
-            OnPlayerJoined?.Invoke();
-
             _gameplayStateMachine.Enter<LoadState, PlayerRef>(player);
+            
+            OnPlayerJoined?.Invoke();
         }
 
         public void PlayerLeft(PlayerRef player)

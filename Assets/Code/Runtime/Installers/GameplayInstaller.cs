@@ -7,9 +7,7 @@ using Code.Runtime.Logic.Supply;
 using Code.Runtime.Logic.WaveSystem;
 using Code.Runtime.Logic.WeaponSystem;
 using Code.Runtime.Services.InputService;
-using Code.Runtime.UI;
 using Code.Runtime.UI.Windows;
-using Fusion;
 using UnityEngine;
 using Zenject;
 
@@ -59,10 +57,10 @@ namespace Code.Runtime.Installers
 
         private void BindInput()
         {
-            // if (Application.isMobilePlatform)
+            if (Application.isMobilePlatform)
                 Container.BindInterfacesTo<MobileInput>().FromInstance(mobileInput).AsSingle();
-            // else
-                // Container.BindInterfacesTo<PCInputService>().AsSingle();
+            else
+                Container.BindInterfacesTo<PCInputService>().AsSingle();
         }
 
         private void BindSupplyFactory()

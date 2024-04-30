@@ -38,7 +38,7 @@ namespace Code.Runtime.Infrastructure.States.Core
             await _networkRunner.StartGame(new StartGameArgs()
             {
                 GameMode = _gameMode,
-                SessionName = "TestRoom",
+                SessionName = _sessionName,
                 Scene = scene,
                 // SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });

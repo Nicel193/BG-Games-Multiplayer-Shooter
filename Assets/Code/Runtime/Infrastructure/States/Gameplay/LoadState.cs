@@ -2,10 +2,7 @@ using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.WaveSystem;
-using Code.Runtime.UI;
-using ExitGames.Client.Photon.StructWrapping;
 using Fusion;
-using UnityEngine;
 
 namespace Code.Runtime.Infrastructure.States.Gameplay
 {
@@ -42,8 +39,6 @@ namespace Code.Runtime.Infrastructure.States.Gameplay
                 _waveHandler.Initialize();
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
     }
 }

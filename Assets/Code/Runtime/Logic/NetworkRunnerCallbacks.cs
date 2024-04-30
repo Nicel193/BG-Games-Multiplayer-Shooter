@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Code.Runtime.Infrastructure.StateMachines;
+using Code.Runtime.Infrastructure.States;
+using Code.Runtime.Infrastructure.States.Core;
 using Code.Runtime.Services.InputService;
 using Fusion;
 using Fusion.Sockets;
@@ -12,6 +15,7 @@ namespace Code.Runtime.Logic
     {
         private NetworkRunner _networkRunner;
         private IInputService _inputService;
+        private GameStateMachine _gameStateMachine;
 
         private void OnEnable()
         {
@@ -30,8 +34,9 @@ namespace Code.Runtime.Logic
         }
 
         [Inject]
-        public void Construct(IInputService inputService, NetworkRunner networkRunner)
+        public void Construct(IInputService inputService, NetworkRunner networkRunner, GameStateMachine gameStateMachine)
         {
+            _gameStateMachine = gameStateMachine;
             _networkRunner = networkRunner;
             _inputService = inputService;
         }
@@ -80,6 +85,7 @@ namespace Code.Runtime.Logic
 
         public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
         {
+
         }
 
         public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
