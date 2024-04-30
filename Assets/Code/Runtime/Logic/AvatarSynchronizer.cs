@@ -30,7 +30,13 @@ namespace Code.Runtime.Logic
             
             RPC_SyncAvatars(_userRepository.AvatarId, Runner.LocalPlayer.PlayerId);
         }
-        
+
+        // [Rpc]
+        // public void RPC_Initialize()
+        // {
+        //     RPC_SyncAvatars(_userRepository.AvatarId, Runner.LocalPlayer.PlayerId);
+        // }
+
         [Rpc]
         private void RPC_SyncAvatars(int avatarId, int playerId)
         {

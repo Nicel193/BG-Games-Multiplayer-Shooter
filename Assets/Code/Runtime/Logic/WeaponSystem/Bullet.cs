@@ -8,15 +8,29 @@ namespace Code.Runtime.Logic.WeaponSystem
     [RequireComponent(typeof(Rigidbody2D))]
     public class Bullet : NetworkBehaviour, IBullet
     {
+        private const float TimeToDespawn = 3f;
+
+        [Networked] private TickTimer Timer { set; get; }
         private Rigidbody2D _bulletRigidbody2D;
-        private NetworkObject _networkObject;
         private Action<bool> _onDamage;
         private int _damage;
 
         private void Awake()
         {
             _bulletRigidbody2D = GetComponent<Rigidbody2D>();
-            _networkObject = GetComponent<NetworkObject>();
+        }
+
+        public override void Spawned()
+        {
+            Timer = TickTimer.CreateFromSeconds(Runner, TimeToDespawn);
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            if(Timer.Expired(Runner))
+            {
+                Runner.Despawn(Object);
+            }
         }
 
         public void Initialize(int damage)
@@ -42,7 +56,7 @@ namespace Code.Runtime.Logic.WeaponSystem
                 
                 _onDamage?.Invoke(damageable.IsDead());
 
-                Runner.Despawn(_networkObject);
+                Runner.Despawn(Object);
             }
         }
     }

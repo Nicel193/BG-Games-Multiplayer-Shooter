@@ -32,6 +32,7 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             PlayerData playerData = playerObject.GetComponent<PlayerData>();
             PlayerDeathHandler playerDeathHandler = playerObject.GetComponent<PlayerDeathHandler>();
+            // AvatarSynchronizer avatarSynchronizer = playerObject.GetComponent<AvatarSynchronizer>();
             playerData.RPC_Initialize(_playerConfig.MaxAmmo, _playerConfig.MaxHealth, playerRef.PlayerId);
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
@@ -48,7 +49,7 @@ namespace Code.Runtime.Logic.PlayerSystem
                 .Where(weapon => !_usedWeapons.Contains(weapon.Key))
                 .Select(weapon => weapon.Key)
                 .ToList();
-            
+
             WeaponType randomWeapon = availableWeapons[Random.Range(0, availableWeapons.Count)];
             _usedWeapons.Add(randomWeapon);
             return randomWeapon;

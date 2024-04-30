@@ -18,6 +18,6 @@ MonoBehaviour:
   - <AvatarSprite>k__BackingField: {fileID: 1438553564, guid: 0c187a32c5bde4747be8d00770b07403, type: 3}
     <AnimatorController>k__BackingField: {fileID: 9100000, guid: a3e0d17e0d0fe5a48b31e996a59ce274, type: 2}
   - <AvatarSprite>k__BackingField: {fileID: -691204398, guid: 8f7a60065e3984c489b9c4d41bc3dc4e, type: 3}
-    <AnimatorController>k__BackingField: {fileID: 0}
+    <AnimatorController>k__BackingField: {fileID: 9100000, guid: 7522374f561c0e540b39f6094f9a8d72, type: 2}
   - <AvatarSprite>k__BackingField: {fileID: 1883720508, guid: 57a1443e67528144aa07582927559650, type: 3}
-    <AnimatorController>k__BackingField: {fileID: 0}
+    <AnimatorController>k__BackingField: {fileID: 9100000, guid: a1fa885bed8f99349af271b0b720d844, type: 2}
