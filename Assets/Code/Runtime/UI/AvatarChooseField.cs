@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Runtime.Configs;
 using Code.Runtime.Repositories;
+using Code.Runtime.Services.SaveService;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,11 +16,13 @@ namespace Code.Runtime.UI
         
         private AvatarConfig _avatarConfig;
         private UserRepository _userRepository;
+        private ISaveService _saveService;
         private List<AvatarView> _avatarViews = new List<AvatarView>();
 
         [Inject]
-        public void Construct(AvatarConfig avatarConfig, UserRepository userRepository)
+        public void Construct(AvatarConfig avatarConfig, UserRepository userRepository, ISaveService saveService)
         {
+            _saveService = saveService;
             _userRepository = userRepository;
             _avatarConfig = avatarConfig;
         }
@@ -56,6 +59,7 @@ namespace Code.Runtime.UI
             chooseAvatarView.Outline.enabled = true;
             
             _userRepository.AvatarId = id;
+            _saveService.Save();
         }
     }
 }

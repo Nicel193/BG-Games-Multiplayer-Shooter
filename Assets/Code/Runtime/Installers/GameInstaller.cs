@@ -3,6 +3,7 @@ using Code.Runtime.Infrastructure.Bootstrappers;
 using Code.Runtime.Infrastructure.StateMachines;
 using Code.Runtime.Interactors;
 using Code.Runtime.Repositories;
+using Code.Runtime.Services.SaveService;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -30,6 +31,13 @@ namespace Code.Runtime.Installers
             BindNetworkRunner();
 
             Container.Bind<UserRepository>().AsSingle();
+
+            BindSaveService();
+        }
+
+        private void BindSaveService()
+        {
+            Container.BindInterfacesTo<SaveService>().AsSingle();
         }
 
         private void BindNetworkRunner()
