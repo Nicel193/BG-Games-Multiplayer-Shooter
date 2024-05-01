@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 3077835608190084849}
   - component: {fileID: 6414348022218877696}
   - component: {fileID: -7674658158458679858}
-  - component: {fileID: 3019655254164222177}
   - component: {fileID: 7717870987416724918}
+  - component: {fileID: 7354435817215056718}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -284,7 +284,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -293,9 +293,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4359441007817186888
 MonoBehaviour:
@@ -399,24 +399,8 @@ MonoBehaviour:
   - {fileID: 1567358686709196608}
   - {fileID: 8663199541682641512}
   - {fileID: 3077835608190084849}
-  - {fileID: 3019655254164222177}
   - {fileID: 7717870987416724918}
---- !u!114 &3019655254164222177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3925259629719052124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
+  - {fileID: 7354435817215056718}
 --- !u!114 &7717870987416724918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +419,22 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 0000000020e23b685928a8ce2b1a167c794069552afa8626a8b5caa3
   TriggerHashes: 000000002afa8626
+--- !u!114 &7354435817215056718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925259629719052124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &8391421101145327137
 GameObject:
   m_ObjectHideFlags: 0

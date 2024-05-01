@@ -11,10 +11,14 @@ namespace Code.Runtime.Logic.PlayerSystem
         private const int OppositeAngle = 180;
         
         private PlayerAnimator _playerAnimator;
+        private Rigidbody2D _rigidbody2D;
         private float _moveSpeed;
-        
-        private void Awake() =>
+
+        private void Awake()
+        {
             _playerAnimator = GetComponent<PlayerAnimator>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+        }
 
         public override void Spawned()
         {
@@ -35,7 +39,7 @@ namespace Code.Runtime.Logic.PlayerSystem
                 Vector3 direction = Runner.DeltaTime * _moveSpeed * data.MoveDirection;
                 
                 transform.eulerAngles = new Vector3(0f, playerRotation, 0f);
-                transform.position += direction;
+                _rigidbody2D.MovePosition(transform.position + direction);
 
                 PlayAnimation(data.MoveDirection);
             }
