@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Runtime.Logic.PlayerSystem;
 using Code.Runtime.Logic.WeaponSystem;
 using Fusion;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Code.Runtime.Configs
         
         [field: Header("Move")]
         [field: SerializeField] public float MoveSpeed { get; private set; }
-        [field: SerializeField] public NetworkPrefabRef PlayerPrefab { get; private set; }
+        [field: SerializeField] public Player PlayerPrefab { get; private set; }
 
         [field: Header("Camera")]
         [field: SerializeField] public Vector3 CameraOffset  { get; private set; }

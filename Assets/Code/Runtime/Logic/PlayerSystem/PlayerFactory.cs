@@ -27,7 +27,7 @@ namespace Code.Runtime.Logic.PlayerSystem
 
         public NetworkObject SpawnPlayer(PlayerRef playerRef)
         {
-            NetworkObject playerObject = _networkRunner.Spawn(_playerConfig.PlayerPrefab, Vector3.zero,
+            Player playerObject = _networkRunner.Spawn(_playerConfig.PlayerPrefab, Vector3.zero,
                 Quaternion.identity, playerRef);
 
             PlayerData playerData = playerObject.GetComponent<PlayerData>();
@@ -37,10 +37,13 @@ namespace Code.Runtime.Logic.PlayerSystem
 
             BaseWeapon weapon = _weaponFactory.SpawnWeapon(GetRandomWeaponType(), playerRef, playerData);
 
+            weapon.transform.position = playerObject.WeaponPivot.position;
+            weapon.transform.SetParent(playerObject.WeaponPivot);
+            
             playerDeathHandler.Initialize(_networkPlayersHandler);
             weapon.transform.SetParent(playerObject.transform);
 
-            return playerObject;
+            return playerObject.Object;
         }
 
         private WeaponType GetRandomWeaponType()

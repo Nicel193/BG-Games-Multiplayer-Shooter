@@ -15,8 +15,7 @@ MonoBehaviour:
   <MaxAmmo>k__BackingField: 30
   <MaxHealth>k__BackingField: 10
   <MoveSpeed>k__BackingField: 5
-  <PlayerPrefab>k__BackingField:
-    RawGuidValue: 2280467eea38f6f49a4a9ac6be92fb50
+  <PlayerPrefab>k__BackingField: {fileID: 4359441007817186888, guid: 2280467eea38f6f49a4a9ac6be92fb50, type: 3}
   <CameraOffset>k__BackingField: {x: 0, y: 0, z: -10}
   <CameraSmoothSpeed>k__BackingField: 5
   weaponConfigs:

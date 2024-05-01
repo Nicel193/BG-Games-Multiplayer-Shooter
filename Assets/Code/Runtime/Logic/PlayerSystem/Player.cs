@@ -6,6 +6,8 @@ namespace Code.Runtime.Logic.PlayerSystem
     [RequireComponent(typeof(PlayerData))]
     public class Player : NetworkBehaviour, IDamageable
     {
+        [field: SerializeField] public Transform WeaponPivot { get; private set; }
+
         private PlayerData _playerData;
         
         private void Awake()
